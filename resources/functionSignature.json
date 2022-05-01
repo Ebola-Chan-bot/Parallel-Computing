@@ -1,0 +1,51 @@
+{
+    "ParallelComputing.RemoteFunctionHandle": {
+        "inputs": [
+            {
+                "name": "FunctionHandle",
+                "kind": "required",
+                "type": "function_handle",
+                "purpose": "要执行的函数句柄"
+            }
+        ]
+    },
+    "ParallelComputing.RemoteFunctionHandle.Invoke": {
+        "inputs": [
+            {
+                "name": "Arg",
+                "kind": "ordered",
+                "purpose": "输入参数",
+                "repeating": true
+            }
+        ]
+    },
+    "ParallelComputing.RemoteFunctionHandle.InvokeAsync": {
+        "inputs": [
+            {
+                "name": "NArgOut",
+                "kind": "ordered",
+                "type": [
+                    "real",
+                    "scalar"
+                ],
+                "purpose": "返回值的个数"
+            },
+            {
+                "name": "Arg",
+                "kind": "ordered",
+                "purpose": "输入参数",
+                "repeating": true
+            }
+        ]
+    },
+    "ParallelComputing.SetParpool": {
+        "inputs": [
+            {
+                "name": "NumWorkers",
+                "kind": "required",
+                "type": "positive",
+                "purpose": "并行池尺寸"
+            }
+        ]
+    }
+}
