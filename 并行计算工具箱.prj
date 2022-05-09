@@ -5,8 +5,7 @@
     <param.email>vhtmfu@outlook.com</param.email>
     <param.company />
     <param.summary>提供一系列实用的并行计算辅助功能.
-@RemoteFunctionHandle 远程调用句柄。无论在哪个线程上调用，都会在创建对象的线程上执行
-SetParpool 将当前并行池设定指定的工作进程数目</param.summary>
+@BlockRWStream 为无法一次性全部读入内存的大文件，提供单线程读写、多线程计算的解决方案。@RemoteFunctionHandle 远程调用句柄。无论在哪个线程上调用，都会在创建对象的线程上执行</param.summary>
     <param.description>埃博拉酱的并行计算工具箱，提供一系列实用的并行计算辅助功能
 
 本项目的发布版本号遵循语义化版本规范。开发者认为这是一个优秀的规范，并向每一位开发者推荐遵守此规范。
@@ -15,11 +14,15 @@ SetParpool 将当前并行池设定指定的工作进程数目</param.summary>
 本包中所有函数均在ParallelComputing命名空间下，使用前需import。使用命名空间是一个好习惯，可以有效防止命名冲突，避免编码时不必要的代码提示干扰。
 
 import ParallelComputing.*
+@BlockRWStream 为无法一次性全部读入内存的大文件，提供单线程读写、多线程计算的解决方案
+
+@IBlockRWer 为BlockRWStream所调用的读写器必须实现的抽象接口类
+
 @RemoteFunctionHandle 远程调用句柄。无论在哪个线程上调用，都会在创建对象的线程上执行
 
 SetParpool 将当前并行池设定指定的工作进程数目</param.description>
     <param.screenshot>${PROJECT_ROOT}\工具箱图像.jpg</param.screenshot>
-    <param.version>2.0.0</param.version>
+    <param.version>2.1.0</param.version>
     <param.output>${PROJECT_ROOT}\并行计算.mltbx</param.output>
     <param.products.name>
       <item>Parallel Computing Toolbox</item>
@@ -64,7 +67,9 @@ resources/project</param.exclude.filters>
     <param.javaclasspath.excludes />
     <param.exported.on.package>false</param.exported.on.package>
     <param.required.addons>
-      <requiredaddons />
+      <requiredaddons>
+        <requiredAddOn earliest="earliest" fromRepository="true" id="372e4ea1-e356-4ee7-a94f-b1790b6318d9" include="false" latest="latest">并行计算</requiredAddOn>
+      </requiredaddons>
     </param.required.addons>
     <param.matlab.project.id />
     <param.matlab.project.name />

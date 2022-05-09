@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- 由 Microsoft Visio, SVG Export 生成 工作框架.svg Page-1 -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"
+		xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="8.21307in" height="7.20531in"
+		viewBox="0 0 591.341 518.782" xml:space="preserve" color-interpolation-filters="sRGB" class="st12">
+	<v:documentProperties v:langID="2052" v:metric="true" v:viewMarkup="false">
+		<v:userDefs>
+			<v:ud v:nameU="msvNoAutoConnect" v:val="VT0(1):26"/>
+		</v:userDefs>
+	</v:documentProperties>
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {fill:#ffffff;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st2 {fill:#000000;font-family:宋体;font-size:0.666664em}
+		.st3 {font-size:1em}
+		.st4 {stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st5 {fill:#ffffff;stroke:none;stroke-linecap:butt;stroke-width:7.2}
+		.st6 {stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st7 {fill:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st8 {fill:#000000;font-family:宋体;font-size:1.00001em}
+		.st9 {marker-start:url(#mrkr1-137);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st10 {fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1;stroke-width:0.22935779816514}
+		.st11 {marker-end:url(#mrkr1-158);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st12 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<defs id="Markers">
+		<g id="lend1">
+			<path d="M 1 -1 L 0 0 L 1 1 " style="stroke-linecap:round;stroke-linejoin:round;fill:none"/>
+		</g>
+		<marker id="mrkr1-137" class="st10" v:arrowType="1" v:arrowSize="2" orient="auto" markerUnits="strokeWidth"
+				overflow="visible">
+			<use xlink:href="#lend1" transform="scale(4.36) "/>
+		</marker>
+		<marker id="mrkr1-158" class="st10" v:arrowType="1" v:arrowSize="2" orient="auto" markerUnits="strokeWidth"
+				overflow="visible">
+			<use xlink:href="#lend1" transform="scale(-4.36,-4.36) "/>
+		</marker>
+	</defs>
+	<g v:mID="0" v:index="1" v:groupContext="foregroundPage">
+		<title>页-1</title>
+		<v:pageProperties v:drawingScale="0.0393701" v:pageScale="0.0393701" v:drawingUnits="24" v:shadowOffsetX="8.50394"
+				v:shadowOffsetY="-8.50394"/>
+		<v:layer v:name="流程图" v:index="0"/>
+		<v:layer v:name="连接线" v:index="1"/>
+		<g id="shape1-1" v:mID="1" v:groupContext="shape" v:layerMember="0" transform="translate(165.298,-80.7806)">
+			<title>外部交互方</title>
+			<desc>文件1</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(1,1,1,1)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="504.609" width="56.7" height="28.3465"/>
+			<rect x="0" y="490.436" width="56.6929" height="28.3465" class="st1"/>
+			<text x="18.35" y="507.01" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>文件1</text>		</g>
+		<g id="shape2-4" v:mID="2" v:groupContext="shape" v:layerMember="0" transform="translate(165.808,-133.154)">
+			<title>数据流程</title>
+			<desc>IBlockRWer 读写器 1</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(1,1,1,1)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="490.436" width="56.7" height="56.6929"/>
+			<path d="M0 490.44 A28.3465 28.3465 0 0 1 56.69 490.44 A28.3465 28.3465 0 1 1 0 490.44 Z" class="st1"/>
+			<text x="8.35" y="483.24" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>IBlockRWer<v:newlineChar/><tspan
+						x="8.35" dy="1.2em" class="st3">（</tspan>读写器）<v:newlineChar/><tspan x="26.35" dy="1.2em" class="st3">1</tspan></text>		</g>
+		<g id="shape5-9" v:mID="5" v:groupContext="shape" v:layerMember="1" transform="translate(200.986,-133.154)">
+			<title>动态连接线</title>
+			<desc>用户定义的读写方法</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="-7.34153" cy="530.541" width="84.01" height="17.6036"/>
+			<path d="M-6.83 518.78 L-6.83 529.41 L-7.34 529.41 L-7.34 542.81" class="st4"/>
+			<rect v:rectContext="textBkgnd" x="-43.3414" y="525.741" width="71.9997" height="9.59985" class="st5"/>
+			<text x="-43.34" y="532.94" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>用户定义的读写方法</text>		</g>
+		<g id="shape7-14" v:mID="7" v:groupContext="shape" v:layerMember="0" transform="translate(165.808,-271.59)">
+			<title>数据流程.7</title>
+			<desc>BlockRWStream</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(1,1,1,1)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="490.436" width="56.7" height="56.6929"/>
+			<path d="M0 490.44 A28.3465 28.3465 0 0 1 56.69 490.44 A28.3465 28.3465 0 1 1 0 490.44 Z" class="st1"/>
+			<text x="2.35" y="492.84" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>BlockRWStream</text>		</g>
+		<g id="shape13-17" v:mID="13" v:groupContext="shape" v:layerMember="0" transform="translate(-414.506,152.766) rotate(-90)">
+			<title>数据存储</title>
+			<desc>计算线程1</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(1,1,1,1)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="492.677" width="56.7" height="52.2107" transform="rotate(90)"/>
+			<path d="M0 518.78 L56.69 518.78" class="st6"/>
+			<path d="M0 466.57 L56.69 466.57" class="st6"/>
+			<rect v:rectContext="textBkgnd" x="474.677" y="-33.1463" width="36" height="9.59985" transform="rotate(90)" class="st5"/>
+			<text x="474.68" y="-25.95" transform="rotate(90)" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>计算线程1</text>		</g>
+		<g id="shape15-23" v:mID="15" v:groupContext="shape" v:layerMember="0" transform="translate(-341.446,153.264) rotate(-90)">
+			<title>数据存储.15</title>
+			<desc>计算线程2</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(1,1,1,1)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="492.677" width="56.7" height="52.2107" transform="rotate(90)"/>
+			<path d="M0 518.78 L56.69 518.78" class="st6"/>
+			<path d="M0 466.57 L56.69 466.57" class="st6"/>
+			<rect v:rectContext="textBkgnd" x="474.677" y="-33.1463" width="36" height="9.59985" transform="rotate(90)" class="st5"/>
+			<text x="474.68" y="-25.95" transform="rotate(90)" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>计算线程2</text>		</g>
+		<g id="shape16-29" v:mID="16" v:groupContext="shape" v:layerMember="0" transform="translate(-256.407,153.264) rotate(-90)">
+			<title>数据存储.16</title>
+			<desc>计算线程3</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(1,1,1,1)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="492.677" width="56.7" height="52.2107" transform="rotate(90)"/>
+			<path d="M0 518.78 L56.69 518.78" class="st6"/>
+			<path d="M0 466.57 L56.69 466.57" class="st6"/>
+			<rect v:rectContext="textBkgnd" x="474.677" y="-33.1463" width="36" height="9.59985" transform="rotate(90)" class="st5"/>
+			<text x="474.68" y="-25.95" transform="rotate(90)" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>计算线程3</text>		</g>
+		<g id="shape17-35" v:mID="17" v:groupContext="shape" v:layerMember="1" transform="translate(78.171,-366.017)">
+			<title>动态连接线.17</title>
+			<path d="M0 518.78 L0 530.16 L115.98 530.16 L115.98 556.52" class="st4"/>
+		</g>
+		<g id="shape18-38" v:mID="18" v:groupContext="shape" v:layerMember="1" transform="translate(151.231,-365.518)">
+			<title>动态连接线.18</title>
+			<desc>Remote Read/Write Block</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="42.5197" cy="545.471" width="104.01" height="17.6036"/>
+			<path d="M0 518.78 L0 529.66 L42.92 529.66 L42.92 556.02" class="st4"/>
+			<rect v:rectContext="textBkgnd" x="-3.48175" y="540.671" width="92.0028" height="9.59985" class="st5"/>
+			<text x="-3.48" y="547.87" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>Remote Read/Write Block</text>		</g>
+		<g id="shape19-43" v:mID="19" v:groupContext="shape" v:layerMember="1" transform="translate(236.27,-365.518)">
+			<title>动态连接线.19</title>
+			<path d="M0 518.78 L0 529.66 L-42.12 529.66 L-42.12 556.02" class="st4"/>
+		</g>
+		<g id="shape20-46" v:mID="20" v:groupContext="shape" v:layerMember="0" transform="translate(49.8246,-443.97)">
+			<title>实体 1</title>
+			<desc>GPU1</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="AntiScale" v:val="VT0(1):26"/>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(5.66929,5.66929,5.66929,5.66929)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="490.436" width="56.7" height="56.6929"/>
+			<rect x="0" y="462.09" width="56.6929" height="56.6929" class="st1"/>
+			<text x="20.35" y="492.84" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>GPU1</text>		</g>
+		<g id="shape22-49" v:mID="22" v:groupContext="shape" v:layerMember="1" transform="translate(71.0844,-422.71)">
+			<title>动态连接线.22</title>
+			<path d="M7.09 518.78 L7.09 497.52" class="st4"/>
+		</g>
+		<g id="shape24-52" v:mID="24" v:groupContext="shape" v:layerMember="0" transform="translate(122.884,-443.471)">
+			<title>实体 1.24</title>
+			<desc>GPU2</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="AntiScale" v:val="VT0(1):26"/>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(5.66929,5.66929,5.66929,5.66929)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="490.436" width="56.7" height="56.6929"/>
+			<rect x="0" y="462.09" width="56.6929" height="56.6929" class="st1"/>
+			<text x="20.35" y="492.84" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>GPU2</text>		</g>
+		<g id="shape25-55" v:mID="25" v:groupContext="shape" v:layerMember="1" transform="translate(144.144,-422.211)">
+			<title>动态连接线.25</title>
+			<path d="M7.09 518.78 L7.09 497.52" class="st4"/>
+		</g>
+		<g id="shape26-58" v:mID="26" v:groupContext="shape" transform="translate(165.404,-422.592)">
+			<title>工作表.26</title>
+			<desc>……</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="508.782" width="56.7" height="20"/>
+			<rect x="0" y="498.782" width="56.6929" height="20" class="st7"/>
+			<text x="16.35" y="512.38" class="st8" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>……</text>		</g>
+		<g id="shape28-61" v:mID="28" v:groupContext="shape" v:layerMember="0" transform="translate(-184.113,152.766) rotate(-90)">
+			<title>数据存储.28</title>
+			<desc>计算线程4</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(1,1,1,1)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="492.677" width="56.7" height="52.2107" transform="rotate(90)"/>
+			<path d="M0 518.78 L56.69 518.78" class="st6"/>
+			<path d="M0 466.57 L56.69 466.57" class="st6"/>
+			<rect v:rectContext="textBkgnd" x="474.677" y="-33.1463" width="36" height="9.59985" transform="rotate(90)" class="st5"/>
+			<text x="474.68" y="-25.95" transform="rotate(90)" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>计算线程4</text>		</g>
+		<g id="shape29-67" v:mID="29" v:groupContext="shape" v:layerMember="1" transform="translate(308.564,-366.017)">
+			<title>动态连接线.29</title>
+			<path d="M0 518.78 L0 530.16 L-114.41 530.16 L-114.41 556.52" class="st4"/>
+		</g>
+		<g id="shape30-70" v:mID="30" v:groupContext="shape" v:layerMember="0" transform="translate(207.924,-443.471)">
+			<title>实体 1.30</title>
+			<desc>CPU1</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="AntiScale" v:val="VT0(1):26"/>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(5.66929,5.66929,5.66929,5.66929)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="490.436" width="56.7" height="56.6929"/>
+			<rect x="0" y="462.09" width="56.6929" height="56.6929" class="st1"/>
+			<text x="20.35" y="492.84" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>CPU1</text>		</g>
+		<g id="shape31-73" v:mID="31" v:groupContext="shape" v:layerMember="0" transform="translate(280.217,-443.97)">
+			<title>实体 1.31</title>
+			<desc>CPU2</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="AntiScale" v:val="VT0(1):26"/>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(5.66929,5.66929,5.66929,5.66929)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="490.436" width="56.7" height="56.6929"/>
+			<rect x="0" y="462.09" width="56.6929" height="56.6929" class="st1"/>
+			<text x="20.35" y="492.84" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>CPU2</text>		</g>
+		<g id="shape32-76" v:mID="32" v:groupContext="shape" v:layerMember="1" transform="translate(229.184,-443.471)">
+			<title>动态连接线.32</title>
+			<path d="M7.09 518.78 L7.09 540.04" class="st4"/>
+		</g>
+		<g id="shape33-79" v:mID="33" v:groupContext="shape" v:layerMember="1" transform="translate(301.477,-443.97)">
+			<title>动态连接线.33</title>
+			<path d="M7.09 518.78 L7.09 540.04" class="st4"/>
+		</g>
+		<g id="shape34-82" v:mID="34" v:groupContext="shape" transform="translate(336.801,-423.34)">
+			<title>工作表.34</title>
+			<desc>……</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="17.5306" cy="508.782" width="35.07" height="20"/>
+			<rect x="0" y="498.782" width="35.0612" height="20" class="st7"/>
+			<text x="5.53" y="512.38" class="st8" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>……</text>		</g>
+		<g id="shape35-85" v:mID="35" v:groupContext="shape" v:layerMember="0" transform="translate(536.902,186.247) rotate(90)">
+			<title>数据存储.35</title>
+			<desc>I/O线程</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(1,1,1,1)" v:tabSpace="42.5197"/>
+			<v:textRect cx="157.438" cy="491.775" width="52.45" height="10.0373" transform="rotate(-90)"/>
+			<path d="M0 518.78 L314.42 518.78" class="st6"/>
+			<path d="M0 218.31 L314.42 218.31" class="st6"/>
+			<rect v:rectContext="textBkgnd" x="-505.776" y="152.638" width="28.0003" height="9.59985" transform="rotate(-90)"
+					class="st5"/>
+			<text x="-505.78" y="159.84" transform="rotate(-90)" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>I/O线程</text>		</g>
+		<g id="shape41-91" v:mID="41" v:groupContext="shape" v:layerMember="0" transform="translate(389.459,-74.8129)">
+			<title>外部交互方.41</title>
+			<desc>文件2</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(1,1,1,1)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="504.609" width="56.7" height="28.3465"/>
+			<rect x="0" y="490.436" width="56.6929" height="28.3465" class="st1"/>
+			<text x="18.35" y="507.01" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>文件2</text>		</g>
+		<g id="shape42-94" v:mID="42" v:groupContext="shape" v:layerMember="0" transform="translate(389.862,-128.895)">
+			<title>数据流程.42</title>
+			<desc>IBlockRWer 读写器 2</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(1,1,1,1)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="490.436" width="56.7" height="56.6929"/>
+			<path d="M0 490.44 A28.3465 28.3465 0 0 1 56.69 490.44 A28.3465 28.3465 0 1 1 0 490.44 Z" class="st1"/>
+			<text x="8.35" y="483.24" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>IBlockRWer<v:newlineChar/><tspan
+						x="8.35" dy="1.2em" class="st3">（</tspan>读写器）<v:newlineChar/><tspan x="26.35" dy="1.2em" class="st3">2</tspan></text>		</g>
+		<g id="shape43-99" v:mID="43" v:groupContext="shape" v:layerMember="1" transform="translate(425.093,-128.895)">
+			<title>动态连接线.43</title>
+			<desc>用户定义的读写方法</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="-7.28834" cy="531.449" width="84.01" height="17.6036"/>
+			<path d="M-6.88 518.78 L-6.88 529.41 L-7.29 529.41 L-7.29 544.52" class="st4"/>
+			<rect v:rectContext="textBkgnd" x="-43.2882" y="526.649" width="71.9997" height="9.59985" class="st5"/>
+			<text x="-43.29" y="533.85" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>用户定义的读写方法</text>		</g>
+		<g id="shape44-104" v:mID="44" v:groupContext="shape" v:layerMember="0" transform="translate(469.649,-74.8129)">
+			<title>外部交互方.44</title>
+			<desc>文件3</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(1,1,1,1)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="504.609" width="56.7" height="28.3465"/>
+			<rect x="0" y="490.436" width="56.6929" height="28.3465" class="st1"/>
+			<text x="18.35" y="507.01" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>文件3</text>		</g>
+		<g id="shape45-107" v:mID="45" v:groupContext="shape" v:layerMember="0" transform="translate(470.053,-128.895)">
+			<title>数据流程.45</title>
+			<desc>IBlockRWer 读写器 3</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(1,1,1,1)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="490.436" width="56.7" height="56.6929"/>
+			<path d="M0 490.44 A28.3465 28.3465 0 0 1 56.69 490.44 A28.3465 28.3465 0 1 1 0 490.44 Z" class="st1"/>
+			<text x="8.35" y="483.24" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>IBlockRWer<v:newlineChar/><tspan
+						x="8.35" dy="1.2em" class="st3">（</tspan>读写器）<v:newlineChar/><tspan x="26.35" dy="1.2em" class="st3">3</tspan></text>		</g>
+		<g id="shape46-112" v:mID="46" v:groupContext="shape" v:layerMember="1" transform="translate(505.284,-128.895)">
+			<title>动态连接线.46</title>
+			<desc>用户定义的读写方法</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="-7.28834" cy="531.449" width="84.01" height="17.6036"/>
+			<path d="M-6.88 518.78 L-6.88 529.41 L-7.29 529.41 L-7.29 544.52" class="st4"/>
+			<rect v:rectContext="textBkgnd" x="-43.2882" y="526.649" width="71.9997" height="9.59985" class="st5"/>
+			<text x="-43.29" y="533.85" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>用户定义的读写方法</text>		</g>
+		<g id="shape47-117" v:mID="47" v:groupContext="shape" transform="translate(537.905,-117.679)">
+			<title>工作表.47</title>
+			<desc>……</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="17.5306" cy="508.782" width="35.07" height="20"/>
+			<rect x="0" y="498.782" width="35.0612" height="20" class="st7"/>
+			<text x="5.53" y="512.38" class="st8" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>……</text>		</g>
+		<g id="shape55-120" v:mID="55" v:groupContext="shape" v:layerMember="0" transform="translate(83.2423,-214.121)">
+			<title>对象</title>
+			<desc>数据块1</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(1,1,1,1)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="490.436" width="56.7" height="56.6929"/>
+			<path d="M8.15 506.49 A6.52164 8.14552 -180 0 0 17.54 513.38 A9.03289 11.2821 -180 0 0 33.88 510.83 A2.73223 3.41255
+						 -180 0 0 36.83 514.52 A10.3961 12.9847 -180 0 0 46.81 509.13 A6.46003 8.06857 -180 0 0 53.85 504.03 A12.0356
+						 9.6362 -111.25 0 0 49.59 493.08 A41.4317 33.1719 -71.16 0 0 56.68 482.3 A14.421 15.8748 -180 0 0 49.21 467.76
+						 A8.6138 9.48218 -180 0 0 32.73 472.3 A7.75643 7.0461 -53.26 0 0 20.37 472.72 A11.3596 10.3193 -113.86 0
+						 0 6.99 488.17 A8.38314 9.22826 -180 0 0 8.15 506.49 Z" class="st1"/>
+			<text x="14.35" y="492.84" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>数据块1</text>		</g>
+		<g id="shape56-123" v:mID="56" v:groupContext="shape" v:layerMember="0" transform="translate(83.2423,-153.512)">
+			<title>对象.56</title>
+			<desc>数据块2</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(1,1,1,1)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="490.436" width="56.7" height="56.6929"/>
+			<path d="M8.15 506.49 A6.52164 8.14552 -180 0 0 17.54 513.38 A9.03289 11.2821 -180 0 0 33.88 510.83 A2.73223 3.41255
+						 -180 0 0 36.83 514.52 A10.3961 12.9847 -180 0 0 46.81 509.13 A6.46003 8.06857 -180 0 0 53.85 504.03 A12.0356
+						 9.6362 -111.25 0 0 49.59 493.08 A41.4317 33.1719 -71.16 0 0 56.68 482.3 A14.421 15.8748 -180 0 0 49.21 467.76
+						 A8.6138 9.48218 -180 0 0 32.73 472.3 A7.75643 7.0461 -53.26 0 0 20.37 472.72 A11.3596 10.3193 -113.86 0
+						 0 6.99 488.17 A8.38314 9.22826 -180 0 0 8.15 506.49 Z" class="st1"/>
+			<text x="14.35" y="492.84" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>数据块2</text>		</g>
+		<g id="shape57-126" v:mID="57" v:groupContext="shape" v:layerMember="0" transform="translate(83.2423,-92.9024)">
+			<title>对象.57</title>
+			<desc>数据块3</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(1,1,1,1)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="490.436" width="56.7" height="56.6929"/>
+			<path d="M8.15 506.49 A6.52164 8.14552 -180 0 0 17.54 513.38 A9.03289 11.2821 -180 0 0 33.88 510.83 A2.73223 3.41255
+						 -180 0 0 36.83 514.52 A10.3961 12.9847 -180 0 0 46.81 509.13 A6.46003 8.06857 -180 0 0 53.85 504.03 A12.0356
+						 9.6362 -111.25 0 0 49.59 493.08 A41.4317 33.1719 -71.16 0 0 56.68 482.3 A14.421 15.8748 -180 0 0 49.21 467.76
+						 A8.6138 9.48218 -180 0 0 32.73 472.3 A7.75643 7.0461 -53.26 0 0 20.37 472.72 A11.3596 10.3193 -113.86 0
+						 0 6.99 488.17 A8.38314 9.22826 -180 0 0 8.15 506.49 Z" class="st1"/>
+			<text x="14.35" y="492.84" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>数据块3</text>		</g>
+		<g id="shape58-129" v:mID="58" v:groupContext="shape" v:layerMember="0" transform="translate(83.2423,-32.2932)">
+			<title>对象.58</title>
+			<desc>……</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(1,1,1,1)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="490.436" width="56.7" height="56.6929"/>
+			<path d="M8.15 506.49 A6.52164 8.14552 -180 0 0 17.54 513.38 A9.03289 11.2821 -180 0 0 33.88 510.83 A2.73223 3.41255
+						 -180 0 0 36.83 514.52 A10.3961 12.9847 -180 0 0 46.81 509.13 A6.46003 8.06857 -180 0 0 53.85 504.03 A12.0356
+						 9.6362 -111.25 0 0 49.59 493.08 A41.4317 33.1719 -71.16 0 0 56.68 482.3 A14.421 15.8748 -180 0 0 49.21 467.76
+						 A8.6138 9.48218 -180 0 0 32.73 472.3 A7.75643 7.0461 -53.26 0 0 20.37 472.72 A11.3596 10.3193 -113.86 0
+						 0 6.99 488.17 A8.38314 9.22826 -180 0 0 8.15 506.49 Z" class="st1"/>
+			<text x="20.35" y="492.84" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>……</text>		</g>
+		<g id="shape59-132" v:mID="59" v:groupContext="shape" v:layerMember="1" transform="translate(135.044,-242.467)">
+			<title>动态连接线.59</title>
+			<path d="M0 518.78 L15.52 518.78 L15.52 599.75 L30.76 599.75" class="st9"/>
+		</g>
+		<g id="shape60-138" v:mID="60" v:groupContext="shape" v:layerMember="1" transform="translate(135.044,-181.858)">
+			<title>动态连接线.60</title>
+			<path d="M0 518.78 L15.52 518.78 L15.52 539.14 L30.76 539.14" class="st9"/>
+		</g>
+		<g id="shape61-143" v:mID="61" v:groupContext="shape" v:layerMember="1" transform="translate(135.044,-121.249)">
+			<title>动态连接线.61</title>
+			<path d="M0 518.78 L15.52 518.78 L15.52 478.53 L30.76 478.53" class="st9"/>
+		</g>
+		<g id="shape62-148" v:mID="62" v:groupContext="shape" v:layerMember="1" transform="translate(135.044,-60.6397)">
+			<title>动态连接线.62</title>
+			<path d="M0 518.78 L15.52 518.78 L15.52 417.92 L30.76 417.92" class="st9"/>
+		</g>
+		<g id="shape63-153" v:mID="63" v:groupContext="shape" v:layerMember="1" transform="translate(111.589,-263.73)">
+			<title>动态连接线.63</title>
+			<desc>Read</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="9.00602" cy="482.576" width="40" height="17.6036"/>
+			<path d="M0 518.78 L0 482.58 L54.22 482.58" class="st11"/>
+			<rect v:rectContext="textBkgnd" x="1.00584" y="477.776" width="16.0005" height="9.59985" class="st5"/>
+			<text x="1.01" y="484.98" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>Read</text>		</g>
+		<g id="shape67-161" v:mID="67" v:groupContext="shape" v:layerMember="0" transform="translate(251.456,-214.121)">
+			<title>对象.67</title>
+			<desc>计算结果1</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(1,1,1,1)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="490.436" width="56.7" height="56.6929"/>
+			<path d="M8.15 506.49 A6.52164 8.14552 -180 0 0 17.54 513.38 A9.03289 11.2821 -180 0 0 33.88 510.83 A2.73223 3.41255
+						 -180 0 0 36.83 514.52 A10.3961 12.9847 -180 0 0 46.81 509.13 A6.46003 8.06857 -180 0 0 53.85 504.03 A12.0356
+						 9.6362 -111.25 0 0 49.59 493.08 A41.4317 33.1719 -71.16 0 0 56.68 482.3 A14.421 15.8748 -180 0 0 49.21 467.76
+						 A8.6138 9.48218 -180 0 0 32.73 472.3 A7.75643 7.0461 -53.26 0 0 20.37 472.72 A11.3596 10.3193 -113.86 0
+						 0 6.99 488.17 A8.38314 9.22826 -180 0 0 8.15 506.49 Z" class="st1"/>
+			<text x="10.35" y="492.84" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>计算结果1</text>		</g>
+		<g id="shape68-164" v:mID="68" v:groupContext="shape" v:layerMember="0" transform="translate(251.456,-153.512)">
+			<title>对象.68</title>
+			<desc>计算结果2</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(1,1,1,1)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="490.436" width="56.7" height="56.6929"/>
+			<path d="M8.15 506.49 A6.52164 8.14552 -180 0 0 17.54 513.38 A9.03289 11.2821 -180 0 0 33.88 510.83 A2.73223 3.41255
+						 -180 0 0 36.83 514.52 A10.3961 12.9847 -180 0 0 46.81 509.13 A6.46003 8.06857 -180 0 0 53.85 504.03 A12.0356
+						 9.6362 -111.25 0 0 49.59 493.08 A41.4317 33.1719 -71.16 0 0 56.68 482.3 A14.421 15.8748 -180 0 0 49.21 467.76
+						 A8.6138 9.48218 -180 0 0 32.73 472.3 A7.75643 7.0461 -53.26 0 0 20.37 472.72 A11.3596 10.3193 -113.86 0
+						 0 6.99 488.17 A8.38314 9.22826 -180 0 0 8.15 506.49 Z" class="st1"/>
+			<text x="10.35" y="492.84" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>计算结果2</text>		</g>
+		<g id="shape69-167" v:mID="69" v:groupContext="shape" v:layerMember="0" transform="translate(251.456,-92.9024)">
+			<title>对象.69</title>
+			<desc>计算结果3</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(1,1,1,1)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="490.436" width="56.7" height="56.6929"/>
+			<path d="M8.15 506.49 A6.52164 8.14552 -180 0 0 17.54 513.38 A9.03289 11.2821 -180 0 0 33.88 510.83 A2.73223 3.41255
+						 -180 0 0 36.83 514.52 A10.3961 12.9847 -180 0 0 46.81 509.13 A6.46003 8.06857 -180 0 0 53.85 504.03 A12.0356
+						 9.6362 -111.25 0 0 49.59 493.08 A41.4317 33.1719 -71.16 0 0 56.68 482.3 A14.421 15.8748 -180 0 0 49.21 467.76
+						 A8.6138 9.48218 -180 0 0 32.73 472.3 A7.75643 7.0461 -53.26 0 0 20.37 472.72 A11.3596 10.3193 -113.86 0
+						 0 6.99 488.17 A8.38314 9.22826 -180 0 0 8.15 506.49 Z" class="st1"/>
+			<text x="10.35" y="492.84" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>计算结果3</text>		</g>
+		<g id="shape70-170" v:mID="70" v:groupContext="shape" v:layerMember="0" transform="translate(251.456,-32.2932)">
+			<title>对象.70</title>
+			<desc>……</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(1,1,1,1)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="490.436" width="56.7" height="56.6929"/>
+			<path d="M8.15 506.49 A6.52164 8.14552 -180 0 0 17.54 513.38 A9.03289 11.2821 -180 0 0 33.88 510.83 A2.73223 3.41255
+						 -180 0 0 36.83 514.52 A10.3961 12.9847 -180 0 0 46.81 509.13 A6.46003 8.06857 -180 0 0 53.85 504.03 A12.0356
+						 9.6362 -111.25 0 0 49.59 493.08 A41.4317 33.1719 -71.16 0 0 56.68 482.3 A14.421 15.8748 -180 0 0 49.21 467.76
+						 A8.6138 9.48218 -180 0 0 32.73 472.3 A7.75643 7.0461 -53.26 0 0 20.37 472.72 A11.3596 10.3193 -113.86 0
+						 0 6.99 488.17 A8.38314 9.22826 -180 0 0 8.15 506.49 Z" class="st1"/>
+			<text x="20.35" y="492.84" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>……</text>		</g>
+		<g id="shape71-173" v:mID="71" v:groupContext="shape" v:layerMember="1" transform="translate(222.501,-299.937)">
+			<title>动态连接线.71</title>
+			<desc>Write</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="46.7544" cy="518.782" width="40" height="17.6036"/>
+			<path d="M0 518.78 L57.3 518.78 L57.3 554.99" class="st11"/>
+			<rect v:rectContext="textBkgnd" x="36.7542" y="513.983" width="20.0006" height="9.59985" class="st5"/>
+			<text x="36.75" y="521.18" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>Write</text>		</g>
+		<g id="shape72-180" v:mID="72" v:groupContext="shape" v:layerMember="1" transform="translate(254.334,-242.467)">
+			<title>动态连接线.72</title>
+			<path d="M0 518.78 L-13.51 518.78 L-13.51 599.75 L-31.83 599.75" class="st11"/>
+		</g>
+		<g id="shape73-185" v:mID="73" v:groupContext="shape" v:layerMember="1" transform="translate(254.334,-181.858)">
+			<title>动态连接线.73</title>
+			<path d="M0 518.78 L-13.51 518.78 L-13.51 539.14 L-31.83 539.14" class="st11"/>
+		</g>
+		<g id="shape74-190" v:mID="74" v:groupContext="shape" v:layerMember="1" transform="translate(254.334,-121.249)">
+			<title>动态连接线.74</title>
+			<path d="M0 518.78 L-13.51 518.78 L-13.51 478.53 L-31.83 478.53" class="st11"/>
+		</g>
+		<g id="shape75-195" v:mID="75" v:groupContext="shape" v:layerMember="1" transform="translate(254.334,-60.6397)">
+			<title>动态连接线.75</title>
+			<path d="M0 518.78 L-13.51 518.78 L-13.51 417.92 L-31.83 417.92" class="st11"/>
+		</g>
+		<g id="shape79-200" v:mID="79" v:groupContext="shape" transform="translate(330.677,-126.284)">
+			<title>普通箭头.79</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+				<v:ud v:nameU="ArrowType" v:prompt="" v:val="VT0(2):26"/>
+			</v:userDefs>
+			<path d="M0 518.78 L11.34 507.44 L11.34 513.11 L36.78 513.11 L36.78 518.78 L36.78 524.45 L11.34 524.45 L11.34 530.12
+						 L0 518.78 Z" class="st1"/>
+		</g>
+		<g id="shape80-202" v:mID="80" v:groupContext="shape" transform="translate(26.6985,-127.776)">
+			<title>普通箭头.80</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+				<v:ud v:nameU="ArrowType" v:prompt="" v:val="VT0(2):26"/>
+			</v:userDefs>
+			<path d="M0 518.78 L11.34 507.44 L11.34 513.11 L36.78 513.11 L36.78 518.78 L36.78 524.45 L11.34 524.45 L11.34 530.12
+						 L0 518.78 Z" class="st1"/>
+		</g>
+		<g id="shape81-204" v:mID="81" v:groupContext="shape" v:layerMember="0" transform="translate(165.808,-202.372)">
+			<title>对象.81</title>
+			<desc>Write返回的收集数据</desc>
+			<v:custProps>
+				<v:cp v:nameU="Cost" v:lbl="成本" v:type="7" v:format="@" v:langID="2052"/>
+				<v:cp v:nameU="Duration" v:lbl="持续时间" v:type="2" v:langID="2052"/>
+				<v:cp v:nameU="Resources" v:lbl="资源" v:langID="2052"/>
+			</v:custProps>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(1,1,1,1)" v:tabSpace="42.5197"/>
+			<v:textRect cx="28.3465" cy="490.436" width="56.7" height="56.6929"/>
+			<path d="M8.15 506.49 A6.52164 8.14552 -180 0 0 17.54 513.38 A9.03289 11.2821 -180 0 0 33.88 510.83 A2.73223 3.41255
+						 -180 0 0 36.83 514.52 A10.3961 12.9847 -180 0 0 46.81 509.13 A6.46003 8.06857 -180 0 0 53.85 504.03 A12.0356
+						 9.6362 -111.25 0 0 49.59 493.08 A41.4317 33.1719 -71.16 0 0 56.68 482.3 A14.421 15.8748 -180 0 0 49.21 467.76
+						 A8.6138 9.48218 -180 0 0 32.73 472.3 A7.75643 7.0461 -53.26 0 0 20.37 472.72 A11.3596 10.3193 -113.86 0
+						 0 6.99 488.17 A8.38314 9.22826 -180 0 0 8.15 506.49 Z" class="st1"/>
+			<text x="2.35" y="488.04" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>Write返回的收<tspan
+						x="16.35" dy="1.2em" class="st3">集数据</tspan></text>		</g>
+		<g id="shape82-208" v:mID="82" v:groupContext="shape" v:layerMember="1" transform="translate(187.067,-189.023)">
+			<title>动态连接线.82</title>
+			<path d="M7.09 517.96 L7.09 505.43" class="st11"/>
+		</g>
+		<g id="shape83-213" v:mID="83" v:groupContext="shape" v:layerMember="1" transform="translate(187.067,-251.981)">
+			<title>动态连接线.83</title>
+			<path d="M7.09 518.78 L7.09 499.17" class="st11"/>
+		</g>
+	</g>
+</svg>
