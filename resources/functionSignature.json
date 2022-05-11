@@ -46,6 +46,20 @@
 			}
 		]
 	},
+	"ParallelComputing.BlockRWStream.RemoteReadAsync":{
+		"inputs":[
+			{
+				"name":"obj",
+				"kind":"required"
+			},
+			{
+				"name":"ReadSize",
+				"kind":"required",
+				"type":"positive",
+				"purpose":"建议读入的字节数"
+			}
+		]
+	},
 	"ParallelComputing.BlockRWStream.RemoteReadBlock":{
 		"inputs":[
 			{

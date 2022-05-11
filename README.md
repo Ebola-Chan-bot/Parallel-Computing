@@ -143,6 +143,28 @@ obj.LocalWriteBlock(Data,BlockIndex)
 Data，数据块处理后的计算结果。可以用元胞数组包含多个复杂的结果。此参数将被直接交给读写器的Write方法。
 
 BlockIndex，数据块的唯一标识符，从LocalWriteBlock获取，以确保读入数据块和返回计算结果一一对应。
+### RemoteReadAsync
+在计算线程上，向I/O线程异步请求读入一个数据块。异步请求不会等待，而是先返回继续执行别的代码，等需要数据时再提取结果。
+
+此方法可以在并行计算线程（parfor spmd parfeval 等）上调用，但会在I/O主线程上执行读入操作，然后将数据返回给计算线程。
+
+**语法**
+```MATLAB
+IPollable=obj.RemoteReadBlock(ReadSize)
+```
+**示例**
+```MATLAB
+IPollable=obj.RemoteReadAsync(ReadSize);
+DoOtherJob();
+IPollable.poll(Inf);
+```
+**输入参数**
+
+ReadSize，建议读入的字节数。因为读入以数据片为最小单位，实际读入的字节数是数据片字节数的整倍，读入数据片的个数为建议字节数/数据片字节数，向下取整。
+
+**返回值**
+
+IPollable(1,1)parallel.pool.PollableDataQueue，可等待的数据队列。需要数据时，调用其poll成员方法可以取得数据。poll将返回1×2元胞行向量，分别包含RemoteReadBlock的两个返回值。
 ### RemoteReadBlock
 在计算线程上，向I/O线程请求读入一个数据块
 
