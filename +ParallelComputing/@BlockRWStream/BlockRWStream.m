@@ -88,7 +88,7 @@ classdef BlockRWStream<handle
 			if Index<=obj.NumObjects
 				obj.PiecesRead=0;
 				RWer=obj.GetRWer(obj.RWObjects(Index));
-				obj.ObjectTable(Index,1:2)={RWer.Metadata,RWer};
+				obj.ObjectTable(Index,1:2)={{RWer.Metadata},{RWer}};
 			end
 		end
 	end
@@ -122,7 +122,8 @@ classdef BlockRWStream<handle
 			%See also ParallelComputing.BlockRWStream.LocalWriteBlock missing ismissing
 			if obj.ObjectsRead<obj.NumObjects
 				ObjectIndex=obj.ObjectsRead+1;
-				[Reader,BlockIndex]=obj.ObjectTable{ObjectIndex,1:2};
+				Reader=obj.ObjectTable.RWer{ObjectIndex};
+				BlockIndex=obj.ObjectTable.BlocksRead(ObjectIndex);
 				EndPiece=min(obj.PiecesRead+floor(ReadSize/Reader.PieceSize),Reader.NumPieces);
 				StartPiece=obj.PiecesRead+1;
 				Data=Reader.Read(StartPiece,EndPiece);
@@ -132,10 +133,13 @@ classdef BlockRWStream<handle
 				end
 				obj.ObjectTable.BlocksRead(ObjectIndex)=BlockIndex;
 				if height(obj.BlockTable)<BlockIndex
+					WarningState=warning;
+					warning off
 					obj.BlockTable.ObjectIndex(BlockIndex*2)=0;
+					warning(WarningState(1).state);
 				end
 				obj.BlockTable(BlockIndex,1:3)={ObjectIndex,StartPiece,EndPiece};
-				if EndPiece<obj.RWer.NumPieces
+				if EndPiece<Reader.NumPieces
 					obj.PiecesRead=EndPiece;
 				else
 					obj.ObjectsRead=ObjectIndex;
@@ -157,11 +161,12 @@ classdef BlockRWStream<handle
 			% Data，数据块处理后的计算结果。可以用元胞数组包含多个复杂的结果。此参数将被直接交给读写器的Write方法。
 			% BlockIndex，数据块的唯一标识符，从LocalWriteBlock获取，以确保读入数据块和返回计算结果一一对应。
 			%See also ParallelComputing.BlockRWStream.LocalReadBlock
-			[ObjectIndex,StartPiece,EndPiece]=obj.BlockTable{BlockIndex,1:3};
-			[Writer,BlocksRead,BlocksWritten]=obj.ObjectTable{ObjectIndex,2:4};
-			obj.BlockTable.ReturnData{BlockIndex}=Writer.Write(Data,StartPiece,EndPiece);
+			ObjectIndex=obj.BlockTable.ObjectIndex(BlockIndex);
+			Writer=obj.ObjectTable.RWer{ObjectIndex};
+			BlocksWritten=obj.ObjectTable.BlocksWritten(ObjectIndex);
+			obj.BlockTable.ReturnData{BlockIndex}=Writer.Write(Data,obj.BlockTable.StartPiece(BlockIndex),obj.BlockTable.EndPiece(BlockIndex));
 			BlocksWritten=BlocksWritten+1;
-			if BlocksWritten==BlocksRead&&obj.ObjectsRead>=ObjectIndex
+			if BlocksWritten==obj.ObjectTable.BlocksRead(ObjectIndex)&&obj.ObjectsRead>=ObjectIndex
 				delete(Writer);
 			end
 			obj.ObjectTable.BlocksWritten(ObjectIndex)=BlocksWritten;
@@ -180,6 +185,25 @@ classdef BlockRWStream<handle
 	end
 	%% 远程
 	methods
+		function IPollable=RemoteReadAsync(obj,ReadSize)
+			%在计算线程上，向I/O线程异步请求读入一个数据块。异步请求不会等待，而是先返回继续执行别的代码，等需要数据时再提取结果。
+			%此方法可以在并行计算线程（parfor spmd parfeval 等）上调用，但会在I/O主线程上执行读入操作，然后将数据返回给计算线程。
+			%# 语法
+			% IPollable=obj.RemoteReadBlock(ReadSize)
+			%# 示例
+			%```
+			% IPollable=obj.RemoteReadAsync(ReadSize);
+			% DoOtherJob();
+			% IPollable.poll(Inf);
+			%```
+			%# 输入参数
+			% ReadSize，建议读入的字节数。因为读入以数据片为最小单位，实际读入的字节数是数据片字节数的整倍，读入数据片的个数为建议字节数/数据片字节数，向下取整。
+			%# 返回值
+			% IPollable(1,1)parallel.pool.PollableDataQueue，可等待的数据队列。需要数据时，调用其poll成员方法可以取得数据。poll将返回1×2元胞行向量，分别包含RemoteReadBlock的两个返回值。
+			%See also ParallelComputing.BlockRWStream.RemoteReadBlock parallel.pool.PollableDataQueue.poll
+			IPollable=parallel.pool.PollableDataQueue;
+			obj.RequestQueue.send({'LocalReadBlock',ReadSize,IPollable});
+		end
 		function [Data,Index]=RemoteReadBlock(obj,ReadSize)
 			%在计算线程上，向I/O线程请求读入一个数据块
 			%此方法可以在并行计算线程（parfor spmd parfeval 等）上调用，但会在I/O主线程上执行读入操作，然后将数据返回给计算线程。
@@ -191,9 +215,7 @@ classdef BlockRWStream<handle
 			% Data，读写器返回的数据块。实际读入操作由读写器实现，因此实际数据块大小不一定符合要求。BlockRWStream只对读写器提出建议，不检查其返回值。此外，如果所有文件已读完，将返回missing。
 			% BlockIndex，数据块的唯一标识符。执行完计算后应将结果同此标识符一并返还给BlockRWStream.RemoteWriteBlock，这样才能实现正确的结果收集和写出。如果所有文件已读完，将返回missing，可用ismissing是否应该结束计算线程。
 			%See also ParallelComputing.BlockRWStream.RemoteWriteBlock missing ismissing
-			ReturnQueue=parallel.pool.PollableDataQueue;
-			obj.RequestQueue.send({'LocalReadBlock',ReadSize,ReturnQueue});
-			varargout=ReturnQueue.poll(Inf);
+			varargout=obj.RemoteReadAsync(ReadSize).poll(Inf);
 			[Data,Index]=varargout{:};
 		end
 		function RemoteWriteBlock(obj,Data,Index)
