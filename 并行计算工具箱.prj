@@ -4,7 +4,7 @@
     <param.authnamewatermark>埃博拉酱</param.authnamewatermark>
     <param.email>vhtmfu@outlook.com</param.email>
     <param.company />
-    <param.summary>提供一系列实用的并行计算辅助功能.
+    <param.summary>提供一系列实用的并行计算辅助功能。
 @BlockRWStream 为无法一次性全部读入内存的大文件，提供单线程读写、多线程计算的解决方案。@RemoteFunctionHandle 远程调用句柄。无论在哪个线程上调用，都会在创建对象的线程上执行</param.summary>
     <param.description>埃博拉酱的并行计算工具箱，提供一系列实用的并行计算辅助功能
 
