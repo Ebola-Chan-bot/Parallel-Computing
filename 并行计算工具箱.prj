@@ -3,7 +3,7 @@
     <param.appname>并行计算</param.appname>
     <param.authnamewatermark>埃博拉酱</param.authnamewatermark>
     <param.email>vhtmfu@outlook.com</param.email>
-    <param.company />
+    <param.company>一致行动党</param.company>
     <param.summary>提供一系列实用的并行计算辅助功能。
 @BlockRWStream 为无法一次性全部读入内存的大文件，提供单线程读写、多线程计算的解决方案。@RemoteFunctionHandle 远程调用句柄。无论在哪个线程上调用，都会在创建对象的线程上执行</param.summary>
     <param.description>埃博拉酱的并行计算工具箱，提供一系列实用的并行计算辅助功能
@@ -22,7 +22,7 @@ import ParallelComputing.*
 
 SetParpool 将当前并行池设定指定的工作进程数目</param.description>
     <param.screenshot>${PROJECT_ROOT}\工具箱图像.jpg</param.screenshot>
-    <param.version>2.1.0</param.version>
+    <param.version>2.1.1</param.version>
     <param.output>${PROJECT_ROOT}\并行计算.mltbx</param.output>
     <param.products.name>
       <item>Parallel Computing Toolbox</item>
@@ -31,7 +31,7 @@ SetParpool 将当前并行池设定指定的工作进程数目</param.descriptio
       <item>80</item>
     </param.products.id>
     <param.products.version>
-      <item>7.6</item>
+      <item>7.7</item>
     </param.products.version>
     <param.platforms />
     <param.guid>372e4ea1-e356-4ee7-a94f-b1790b6318d9</param.guid>
@@ -68,7 +68,7 @@ resources/project</param.exclude.filters>
     <param.exported.on.package>false</param.exported.on.package>
     <param.required.addons>
       <requiredaddons>
-        <requiredAddOn earliest="earliest" fromRepository="true" id="372e4ea1-e356-4ee7-a94f-b1790b6318d9" include="false" latest="latest">并行计算</requiredAddOn>
+        <requiredAddOn earliest="2.1.0" fromRepository="true" id="372e4ea1-e356-4ee7-a94f-b1790b6318d9" include="false" latest="latest">并行计算</requiredAddOn>
       </requiredaddons>
     </param.required.addons>
     <param.matlab.project.id />
@@ -87,7 +87,6 @@ resources/project</param.exclude.filters>
     <param.additional.sw.mac.url />
     <param.additional.sw.linux.url />
     <unset>
-      <param.company />
       <param.output />
       <param.platforms />
       <param.exclude.pcodedmfiles />
@@ -131,7 +130,7 @@ resources/project</param.exclude.filters>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2022a</root>
+      <root>C:\Program Files\MATLAB\R2022b</root>
       <toolboxes />
     </matlab>
     <platform>
