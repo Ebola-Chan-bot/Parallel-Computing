@@ -31,7 +31,7 @@ SetParpool 将当前并行池设定指定的工作进程数目</param.descriptio
       <item>80</item>
     </param.products.id>
     <param.products.version>
-      <item>7.6</item>
+      <item>7.7</item>
     </param.products.version>
     <param.platforms />
     <param.guid>372e4ea1-e356-4ee7-a94f-b1790b6318d9</param.guid>
@@ -131,7 +131,7 @@ resources/project
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2022a</root>
+      <root>C:\Program Files\MATLAB\R2022b</root>
       <toolboxes />
     </matlab>
     <platform>
