@@ -57,6 +57,8 @@ classdef BlockRWStream<handle
 		ObjectsRead=0
 		%当前文件已经读完的数据片个数
 		PiecesRead
+		%已经读完的数据块总数
+		BlocksRead=0
 		%维护每个数据块的信息表
 		BlockTable=table('Size',[0,4],'VariableTypes',["uint16","uint16","uint16","cell"],'VariableNames',["ObjectIndex","StartPiece","EndPiece","ReturnData"])
 		%维护每个文件的信息表
@@ -123,22 +125,21 @@ classdef BlockRWStream<handle
 			if obj.ObjectsRead<obj.NumObjects
 				ObjectIndex=obj.ObjectsRead+1;
 				Reader=obj.ObjectTable.RWer{ObjectIndex};
-				BlockIndex=obj.ObjectTable.BlocksRead(ObjectIndex);
 				EndPiece=min(obj.PiecesRead+floor(ReadSize/Reader.PieceSize),Reader.NumPieces);
 				StartPiece=obj.PiecesRead+1;
 				Data=Reader.Read(StartPiece,EndPiece);
-				BlockIndex=BlockIndex+1;
+				obj.BlocksRead=obj.BlocksRead+1;
 				if nargin>2
-					ReturnQueue.send({Data,BlockIndex});
+					ReturnQueue.send({Data,obj.BlocksRead});
 				end
-				obj.ObjectTable.BlocksRead(ObjectIndex)=BlockIndex;
-				if height(obj.BlockTable)<BlockIndex
+				obj.ObjectTable.BlocksRead(ObjectIndex)=obj.ObjectTable.BlocksRead(ObjectIndex)+1;
+				if height(obj.BlockTable)<obj.BlocksRead
 					WarningState=warning;
 					warning off
-					obj.BlockTable.ObjectIndex(BlockIndex*2)=0;
+					obj.BlockTable.ObjectIndex(obj.BlocksRead*2)=0;
 					warning(WarningState(1).state);
 				end
-				obj.BlockTable(BlockIndex,1:3)={ObjectIndex,StartPiece,EndPiece};
+				obj.BlockTable(obj.BlocksRead,1:3)={ObjectIndex,StartPiece,EndPiece};
 				if EndPiece<Reader.NumPieces
 					obj.PiecesRead=EndPiece;
 				else
@@ -163,9 +164,8 @@ classdef BlockRWStream<handle
 			%See also ParallelComputing.BlockRWStream.LocalReadBlock
 			ObjectIndex=obj.BlockTable.ObjectIndex(BlockIndex);
 			Writer=obj.ObjectTable.RWer{ObjectIndex};
-			BlocksWritten=obj.ObjectTable.BlocksWritten(ObjectIndex);
 			obj.BlockTable.ReturnData{BlockIndex}=Writer.Write(Data,obj.BlockTable.StartPiece(BlockIndex),obj.BlockTable.EndPiece(BlockIndex));
-			BlocksWritten=BlocksWritten+1;
+			BlocksWritten=obj.ObjectTable.BlocksWritten(ObjectIndex)+1;
 			if BlocksWritten==obj.ObjectTable.BlocksRead(ObjectIndex)&&obj.ObjectsRead>=ObjectIndex
 				delete(Writer);
 			end
@@ -177,9 +177,8 @@ classdef BlockRWStream<handle
 			%CollectData，一个元胞列向量，每个元胞对应一个文件的计算结果。元胞内又是元胞列向量，每个元胞对应一个数据块的计算结果，即计算线程每次调用Local/Remote WriteBlock时提供的Data参数。如果使用SpmdRun，每个数据块的计算结果将是一个元胞行向量，对应计算函数的每个返回值。
 			% 例如，如果返回m×1元胞列向量，说明输入的文件有m个；其中第a个元胞内是n×1元胞列向量，说明第a个文件被分成了n块读入；其中第b个元胞内是1×p元胞行向量，说明可能是用了SpmdRun且计算函数有p个返回值。
 			%Metadata，每个文件的元数据，为每个读写器的Metadata属性值，排列在元胞列向量中。
-			ObjectIndex=obj.BlockTable.ObjectIndex;
-			BlockLogical=logical(ObjectIndex);
-			CollectData=splitapply(@(RD){RD},obj.BlockTable.ReturnData(BlockLogical),ObjectIndex(BlockLogical));
+			BlockIndex=1:obj.BlocksRead;
+			CollectData=splitapply(@(RD){RD},obj.BlockTable.ReturnData(BlockIndex),obj.BlockTable.ObjectIndex(BlockIndex));
 			Metadata=obj.ObjectTable.Metadata;
 		end
 	end

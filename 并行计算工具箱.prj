@@ -22,7 +22,7 @@ import ParallelComputing.*
 
 SetParpool 将当前并行池设定指定的工作进程数目</param.description>
     <param.screenshot>${PROJECT_ROOT}\工具箱图像.jpg</param.screenshot>
-    <param.version>2.1.1</param.version>
+    <param.version>2.1.3</param.version>
     <param.output>${PROJECT_ROOT}\并行计算.mltbx</param.output>
     <param.products.name>
       <item>Parallel Computing Toolbox</item>
@@ -31,7 +31,7 @@ SetParpool 将当前并行池设定指定的工作进程数目</param.descriptio
       <item>80</item>
     </param.products.id>
     <param.products.version>
-      <item>7.7</item>
+      <item>7.6</item>
     </param.products.version>
     <param.platforms />
     <param.guid>372e4ea1-e356-4ee7-a94f-b1790b6318d9</param.guid>
@@ -55,7 +55,8 @@ SetParpool 将当前并行池设定指定的工作进程数目</param.descriptio
 % **/*.bak
 %
 .git*
-resources/project</param.exclude.filters>
+resources/project
+**/*.vsdx</param.exclude.filters>
     <param.exclude.pcodedmfiles>true</param.exclude.pcodedmfiles>
     <param.examples />
     <param.demosxml />
@@ -130,7 +131,7 @@ resources/project</param.exclude.filters>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2022b</root>
+      <root>C:\Program Files\MATLAB\R2022a</root>
       <toolboxes />
     </matlab>
     <platform>
