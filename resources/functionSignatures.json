@@ -1,0 +1,323 @@
+{
+	"ParallelComputing.BlockRWStream": {
+		"inputs": [
+			{
+				"name": "RWObjects",
+				"kind": "required",
+				"purpose": "文件列表。本质上是要交给GetRWer的参数"
+			},
+			{
+				"name": "GetRWer",
+				"kind": "required",
+				"purpose": "用于获取读写器的函数句柄"
+			}
+		]
+	},
+	"ParallelComputing.BlockRWStream.LocalReadBlock": {
+		"inputs": [
+			{
+				"name": "obj",
+				"kind": "required"
+			},
+			{
+				"name": "ReadSize",
+				"kind": "required",
+				"type": "positive",
+				"purpose": "建议读入的字节数"
+			}
+		]
+	},
+	"ParallelComputing.BlockRWStream.LocalWriteBlock": {
+		"inputs": [
+			{
+				"name": "obj",
+				"kind": "required"
+			},
+			{
+				"name": "Data",
+				"kind": "required",
+				"purpose": "数据块处理后的计算结果"
+			},
+			{
+				"name": "BlockIndex",
+				"kind": "required",
+				"type": "positive",
+				"purpose": "数据块的唯一标识符"
+			}
+		]
+	},
+	"ParallelComputing.BlockRWStream.RemoteReadAsync": {
+		"inputs": [
+			{
+				"name": "obj",
+				"kind": "required"
+			},
+			{
+				"name": "ReadSize",
+				"kind": "required",
+				"type": "positive",
+				"purpose": "建议读入的字节数"
+			}
+		]
+	},
+	"ParallelComputing.BlockRWStream.RemoteReadBlock": {
+		"inputs": [
+			{
+				"name": "obj",
+				"kind": "required"
+			},
+			{
+				"name": "ReadSize",
+				"kind": "required",
+				"type": "positive",
+				"purpose": "建议读入的字节数"
+			}
+		]
+	},
+	"ParallelComputing.BlockRWStream.RemoteWriteBlock": {
+		"inputs": [
+			{
+				"name": "obj",
+				"kind": "required"
+			},
+			{
+				"name": "Data",
+				"kind": "required",
+				"purpose": "数据块处理后的计算结果"
+			},
+			{
+				"name": "BlockIndex",
+				"kind": "required",
+				"type": "positive",
+				"purpose": "数据块的唯一标识符"
+			}
+		]
+	},
+	"ParallelComputing.BlockRWStream.SpmdRun": {
+		"inputs": [
+			{
+				"name": "obj",
+				"kind": "required"
+			},
+			{
+				"name": "BlockProcess",
+				"kind": "required",
+				"purpose": "用户提供的处理单个数据块的函数句柄"
+			},
+			{
+				"name": "ConstantArgument",
+				"kind": "ordered",
+				"repeating": true,
+				"purpose": "提供给BlockProcess的常量参数"
+			},
+			{
+				"name": "NArgOut",
+				"kind": "namevalue",
+				"type": [
+					"real",
+					"scalar"
+				],
+				"purpose": "BlockProcess的返回值个数"
+			},
+			{
+				"name": "RuntimeCost",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "运行时实际将要占用的内存是数据块的多少倍"
+			},
+			{
+				"name": "NumGpuArguments",
+				"kind": "namevalue",
+				"type": [
+					"real",
+					"scalar"
+				],
+				"purpose": "前几个数据块参数要送入GPU运行"
+			}
+		]
+	},
+	"ParallelComputing.IBlockRWer.Read": {
+		"inputs": [
+			{
+				"name": "obj",
+				"kind": "required"
+			},
+			{
+				"name": "Start",
+				"kind": "required",
+				"type": "positive",
+				"purpose": "起始数据片"
+			},
+			{
+				"name": "End",
+				"kind": "required",
+				"type": "positive",
+				"purpose": "终止数据片"
+			}
+		]
+	},
+	"ParallelComputing.IBlockRWer.Write": {
+		"inputs": [
+			{
+				"name": "obj",
+				"kind": "required"
+			},
+			{
+				"name": "Data",
+				"kind": "required",
+				"purpose": "要写出的数据块"
+			},
+			{
+				"name": "Start",
+				"kind": "required",
+				"type": "positive",
+				"purpose": "读取该数据块时的起始数据片位置"
+			},
+			{
+				"name": "End",
+				"kind": "required",
+				"type": "positive",
+				"purpose": "读取该数据块时的终止数据片位置"
+			}
+		]
+	},
+	"ParallelComputing.RemoteFunctionHandle": {
+		"inputs": [
+			{
+				"name": "FunctionHandle",
+				"kind": "required",
+				"type": "function_handle",
+				"purpose": "要执行的函数句柄"
+			}
+		]
+	},
+	"ParallelComputing.RemoteFunctionHandle.Invoke": {
+		"inputs": [
+			{
+				"name": "Arg",
+				"kind": "ordered",
+				"purpose": "输入参数",
+				"repeating": true
+			}
+		]
+	},
+	"ParallelComputing.RemoteFunctionHandle.InvokeAsync": {
+		"inputs": [
+			{
+				"name": "NArgOut",
+				"kind": "ordered",
+				"type": [
+					"real",
+					"scalar"
+				],
+				"purpose": "返回值的个数"
+			},
+			{
+				"name": "Arg",
+				"kind": "ordered",
+				"purpose": "输入参数",
+				"repeating": true
+			}
+		]
+	},
+	"ParallelComputing.ParPool": {
+		"inputs": [
+			{
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "PoolSize",
+							"kind": "namevalue",
+							"type": "positive",
+							"purpose": "强制指定并行池尺寸"
+						},
+						{
+							"name": "ProfileName",
+							"kind": "namevalue",
+							"type": [
+								[
+									"char",
+									"row"
+								],
+								[
+									"string",
+									"scalar"
+								]
+							],
+							"purpose": "强制指定默认配置名"
+						}
+					],
+					[
+						{
+							"name": "PoolSize",
+							"kind": "namevalue",
+							"type": "positive",
+							"purpose": "强制指定并行池尺寸"
+						},
+						{
+							"name": "ProfileNameIfNew",
+							"kind": "namevalue",
+							"type": [
+								[
+									"char",
+									"row"
+								],
+								[
+									"string",
+									"scalar"
+								]
+							],
+							"purpose": "建议默认配置名"
+						}
+					],
+					[
+						{
+							"name": "PoolSizeIfNew",
+							"kind": "namevalue",
+							"type": "positive",
+							"purpose": "建议并行池尺寸"
+						},
+						{
+							"name": "ProfileName",
+							"kind": "namevalue",
+							"type": [
+								[
+									"char",
+									"row"
+								],
+								[
+									"string",
+									"scalar"
+								]
+							],
+							"purpose": "强制指定默认配置名"
+						}
+					],
+					[
+						{
+							"name": "ProfileNameIfNew",
+							"kind": "namevalue",
+							"type": [
+								[
+									"char",
+									"row"
+								],
+								[
+									"string",
+									"scalar"
+								]
+							],
+							"purpose": "建议默认配置名"
+						},
+						{
+							"name": "PoolSizeIfNew",
+							"kind": "namevalue",
+							"type": "positive",
+							"purpose": "建议并行池尺寸"
+						}
+					]
+				]
+			}
+		]
+	}
+}
