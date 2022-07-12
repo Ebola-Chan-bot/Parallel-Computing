@@ -112,8 +112,8 @@ classdef BlockRWStream<handle
 			obj.NextObject;
 		end
 		function [Data,BlockIndex]=LocalReadBlock(obj,ReadSize,ReturnQueue)
-			%在单进程环境下，读入一个数据块。
-			%此方法只能在构造该对象的进程上调用，因此通常用于单进程环境，退化为读入-计算-写出的简单流程。
+			%在单线程环境下，读入一个数据块。
+			%此方法只能在构造该对象的进程上调用，多线程环境下则会发生争用，因此通常用于单线程环境，退化为读入-计算-写出的简单流程。
 			%# 语法
 			% [Data,BlockIndex]=obj.LocalReadBlock(ReadSize)
 			%# 输入参数
@@ -154,8 +154,8 @@ classdef BlockRWStream<handle
 			end
 		end
 		function LocalWriteBlock(obj,Data,BlockIndex)
-			%在单进程环境下，写出一个数据块。
-			%此方法只能在构造该对象的进程上调用，因此通常用于单进程环境，退化为读入-计算-写出的简单流程。
+			%在单线程环境下，写出一个数据块。
+			%此方法只能在构造该对象的进程上调用，多线程环境下则会发生争用，因此通常用于单线程环境，退化为读入-计算-写出的简单流程。
 			%# 语法
 			% obj.LocalWriteBlock(Data,BlockIndex)
 			%# 输入参数
