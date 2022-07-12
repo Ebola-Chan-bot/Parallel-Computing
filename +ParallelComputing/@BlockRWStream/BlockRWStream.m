@@ -42,9 +42,12 @@ classdef BlockRWStream<handle
 	%% 通信
 	properties(SetAccess=immutable,GetAccess=private,Hidden)
 		RequestQueue parallel.pool.DataQueue
-		LocalMutex parallel.pool.PollableDataQueue
 	end
 	%% 本地
+% 	properties(SetAccess=immutable,GetAccess=private,Transient)
+% 		ReadMutex parallel.pool.PollableDataQueue
+% 		WriteMutex parallel.pool.PollableDataQueue
+% 	end
 	properties(SetAccess=immutable,Transient)
 		%输入的文件列表，依次作为GetRWer的参数以获取读写器。
 		RWObjects
@@ -104,15 +107,18 @@ classdef BlockRWStream<handle
 			% RWObjects(:,1)，文件列表。本质上是要交给GetRWer的参数，因此该参数具体内容由GetRWer决定。每次打开新文件，会将RWObjects的一个元素交给GetRWer以获取读写器。可以用元胞包含复杂参数，或者继承此类以实现更复杂的构造。
 			% GetRWer，用于获取读写器的函数句柄。该句柄必须只接受一个标量参数，输出一个ParallelComputing.IBlockRWer对象。
 			%See also ParallelComputing.IBlockRWer
+			import parallel.pool.*
 			obj.RWObjects=RWObjects;
 			obj.NumObjects=numel(RWObjects);
 			obj.GetRWer=GetRWer;
-			obj.RequestQueue=parallel.pool.DataQueue;
+			obj.RequestQueue=DataQueue;
 			obj.RequestQueue.afterEach(@(Request)obj.(Request{1})(Request{2:end}));
 			obj.ObjectTable=table('Size',[obj.NumObjects,4],'VariableTypes',["cell","cell","uint16","uint16"],'VariableNames',["Metadata","RWer","BlocksRead","BlocksWritten"]);
 			obj.NextObject;
-			obj.LocalMutex=parallel.pool.PollableDataQueue;
-			obj.LocalMutex.send([]);
+% 			obj.ReadMutex=PollableDataQueue;
+% 			obj.ReadMutex.send([]);
+% 			obj.WriteMutex=PollableDataQueue;
+% 			obj.WriteMutex.send([]);
 		end
 		function [Data,BlockIndex]=LocalReadBlock(obj,ReadSize,ReturnQueue)
 			%在单线程环境下，读入一个数据块。
@@ -125,7 +131,7 @@ classdef BlockRWStream<handle
 			% Data，读写器返回的数据块。实际读入操作由读写器实现，因此实际数据块大小不一定符合要求。BlockRWStream只对读写器提出建议，不检查其返回值。此外，如果所有文件已读完，将返回missing。
 			% BlockIndex，数据块的唯一标识符。执行完计算后应将结果同此标识符一并返还给BlockRWStream.LocalWriteBlock，这样才能实现正确的结果收集和写出。如果所有文件已读完，将返回missing，可用ismissing是否应该结束计算线程。
 			%See also ParallelComputing.BlockRWStream.LocalWriteBlock missing ismissing
-			obj.LocalMutex.poll(Inf);
+% 			obj.ReadMutex.poll(Inf);
 			if obj.ObjectsRead<obj.NumObjects
 				ObjectIndex=obj.ObjectsRead+1;
 				Reader=obj.ObjectTable.RWer{ObjectIndex};
@@ -156,7 +162,7 @@ classdef BlockRWStream<handle
 					ReturnQueue.send({Data,BlockIndex});
 				end
 			end
-			obj.LocalMutex.send([]);
+% 			obj.ReadMutex.send([]);
 		end
 		function LocalWriteBlock(obj,Data,BlockIndex)
 			%在单线程环境下，写出一个数据块。
@@ -167,7 +173,7 @@ classdef BlockRWStream<handle
 			% Data，数据块处理后的计算结果。可以用元胞数组包含多个复杂的结果。此参数将被直接交给读写器的Write方法。
 			% BlockIndex，数据块的唯一标识符，从LocalWriteBlock获取，以确保读入数据块和返回计算结果一一对应。
 			%See also ParallelComputing.BlockRWStream.LocalReadBlock
-			obj.LocalMutex.poll(Inf);
+% 			obj.WriteMutex.poll(Inf);
 			ObjectIndex=obj.BlockTable.ObjectIndex(BlockIndex);
 			Writer=obj.ObjectTable.RWer{ObjectIndex};
 			obj.BlockTable.ReturnData{BlockIndex}=Writer.Write(Data,obj.BlockTable.StartPiece(BlockIndex),obj.BlockTable.EndPiece(BlockIndex));
@@ -176,7 +182,7 @@ classdef BlockRWStream<handle
 				delete(Writer);
 			end
 			obj.ObjectTable.BlocksWritten(ObjectIndex)=BlocksWritten;
-			obj.LocalMutex.send([]);
+% 			obj.WriteMutex.send([]);
 		end
 		function [CollectData,Metadata]=CollectReturn(obj)
 			%所有计算线程结束后，由主线程调用此方法，收集返回的计算结果。
