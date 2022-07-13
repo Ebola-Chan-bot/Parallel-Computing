@@ -56,7 +56,8 @@ SetParpool 将当前并行池设定指定的工作进程数目</param.descriptio
 %
 .git*
 resources/project
-**/*.vsdx</param.exclude.filters>
+**/*.vsdx
+**/*.asv</param.exclude.filters>
     <param.exclude.pcodedmfiles>true</param.exclude.pcodedmfiles>
     <param.examples />
     <param.demosxml />
