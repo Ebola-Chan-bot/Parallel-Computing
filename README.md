@@ -108,6 +108,8 @@ end
 ```
 函数
 ```MATLAB
+%修复含有非ASCII字符的主机名的主机不能启动并行池的问题
+function NonAsciiHostnameParpoolFix
 %内置parpool函数的增强版，可选保留当前配置不变
 function Pool = ParPool(options)
 ```

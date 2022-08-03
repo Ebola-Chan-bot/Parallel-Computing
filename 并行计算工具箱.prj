@@ -4,25 +4,16 @@
     <param.authnamewatermark>埃博拉酱</param.authnamewatermark>
     <param.email>vhtmfu@outlook.com</param.email>
     <param.company>一致行动党</param.company>
-    <param.summary>提供一系列实用的并行计算辅助功能。
-@BlockRWStream 为无法一次性全部读入内存的大文件，提供单线程读写、多线程计算的解决方案。@RemoteFunctionHandle 远程调用句柄。无论在哪个线程上调用，都会在创建对象的线程上执行</param.summary>
-    <param.description>埃博拉酱的并行计算工具箱，提供一系列实用的并行计算辅助功能
-
-本项目的发布版本号遵循语义化版本规范。开发者认为这是一个优秀的规范，并向每一位开发者推荐遵守此规范。
-
-目录
-本包中所有函数均在ParallelComputing命名空间下，使用前需import。使用命名空间是一个好习惯，可以有效防止命名冲突，避免编码时不必要的代码提示干扰。
-
-import ParallelComputing.*
-@BlockRWStream 为无法一次性全部读入内存的大文件，提供单线程读写、多线程计算的解决方案
-
-@IBlockRWer 为BlockRWStream所调用的读写器必须实现的抽象接口类
-
-@RemoteFunctionHandle 远程调用句柄。无论在哪个线程上调用，都会在创建对象的线程上执行
-
-SetParpool 将当前并行池设定指定的工作进程数目</param.description>
+    <param.summary>埃博拉酱的并行计算工具箱，提供一系列实用的并行计算辅助功能：
+为无法一次性全部读入内存的大文件，提供单线程读写、多线程计算的解决方案
+远程调用句柄。无论在哪个线程上调用，都会在创建对象的线程上执行
+替官方修复MATLAB在含有非ASCII字符的主机名的主机上不能启动并行池的bug</param.summary>
+    <param.description>为无法一次性全部读入内存的大文件，提供单线程读写、多线程计算的解决方案
+远程调用句柄。无论在哪个线程上调用，都会在创建对象的线程上执行
+替官方修复含有非ASCII字符的主机名的主机不能启动并行池的问题
+内置parpool函数的增强版，可选保留当前配置不变</param.description>
     <param.screenshot>${PROJECT_ROOT}\工具箱图像.jpg</param.screenshot>
-    <param.version>3.0.0</param.version>
+    <param.version>3.1.0</param.version>
     <param.output>${PROJECT_ROOT}\并行计算.mltbx</param.output>
     <param.products.name>
       <item>Parallel Computing Toolbox</item>
@@ -79,9 +70,9 @@ resources/project
     <param.release.end>latest</param.release.end>
     <param.release.current.only>false</param.release.current.only>
     <param.compatiblity.windows>true</param.compatiblity.windows>
-    <param.compatiblity.macos>true</param.compatiblity.macos>
-    <param.compatiblity.linux>true</param.compatiblity.linux>
-    <param.compatiblity.matlabonline>true</param.compatiblity.matlabonline>
+    <param.compatiblity.macos>false</param.compatiblity.macos>
+    <param.compatiblity.linux>false</param.compatiblity.linux>
+    <param.compatiblity.matlabonline>false</param.compatiblity.matlabonline>
     <param.installation.map />
     <param.additional.sw.names />
     <param.additional.sw.licenses />
@@ -104,9 +95,6 @@ resources/project
       <param.matlab.project.name />
       <param.release.current.only />
       <param.compatiblity.windows />
-      <param.compatiblity.macos />
-      <param.compatiblity.linux />
-      <param.compatiblity.matlabonline />
       <param.installation.map />
       <param.additional.sw.names />
       <param.additional.sw.licenses />
@@ -123,6 +111,7 @@ resources/project
       <file>${PROJECT_ROOT}\README.md</file>
       <file>${PROJECT_ROOT}\resources</file>
       <file>${PROJECT_ROOT}\工具箱图像.jpg</file>
+      <file>${PROJECT_ROOT}\部署</file>
     </fileset.rootfiles>
     <fileset.depfun.included />
     <fileset.depfun.excluded />
