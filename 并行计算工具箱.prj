@@ -13,7 +13,7 @@
 替官方修复含有非ASCII字符的主机名的主机不能启动并行池的问题
 内置parpool函数的增强版，可选保留当前配置不变</param.description>
     <param.screenshot>${PROJECT_ROOT}\工具箱图像.jpg</param.screenshot>
-    <param.version>3.1.0</param.version>
+    <param.version>3.1.1</param.version>
     <param.output>${PROJECT_ROOT}\并行计算.mltbx</param.output>
     <param.products.name>
       <item>Parallel Computing Toolbox</item>
