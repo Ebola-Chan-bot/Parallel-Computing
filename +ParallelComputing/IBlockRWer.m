@@ -34,12 +34,14 @@ classdef(Abstract)IBlockRWer<handle
 	%数据片指的是一次性必须读入的最小数据单元，小于这个单元的数据将无法处理。每次读入的数据块通常由多个相邻的数据片顺序串联而成，具体串联多少个取决于当前内存状况。例如，对于视频，一个数据片通常就是一帧。
 	%See also ParallelComputing.BlockRWStream ParallelComputing.BlockRWStream.SpmdRun
 	properties(SetAccess=immutable,Abstract)
-		%必须实现的抽象属性，指示每个数据片的字节数。BlockRWStream将根据此属性决定一次要读取多少片。
+		%指示每个数据片的字节数。BlockRWStream将根据此属性决定一次要读取多少片。
 		PieceSize double
-		%必须实现的抽象属性，指示文件中有多少个数据片。BlockRWStream将根据此属性判断是否已读取完该文件。
+		%指示文件中有多少个数据片。BlockRWStream将根据此属性判断是否已读取完该文件。
 		NumPieces double
-		%必须实现的抽象属性，专属于该文件的元数据信息。BlockRWStream将在打开每个文件时收集该元数据。如果文件没有元数据，可以不设置此属性的值。
-		Metadata
+		%文件特定、无关分块的，需要收集的数据。BlockRWStream将在打开每个文件时收集该数据，然后在CollectReturn时一并返回。如果文件没有需要收集的数据，可以不设置此属性的值。
+		CollectData
+		%文件特定、在块间共享的，处理过程所必需的数据。
+		ProcessData
 	end
 	methods(Abstract)
 		%必须实现的抽象成员方法，用于读取指定的数据块。

@@ -120,7 +120,7 @@ classdef BlockRWStream<handle
 % 			obj.WriteMutex=PollableDataQueue;
 % 			obj.WriteMutex.send([]);
 		end
-		function [Data,BlockIndex]=LocalReadBlock(obj,ReadSize,ReturnQueue)
+		function [Data,BlockIndex,ObjectIndex,ObjectData]=LocalReadBlock(obj,ReadSize,LastObjectIndex,ReturnQueue)
 			%在单线程环境下，读入一个数据块。
 			%此方法只能在构造该对象的进程上调用，多线程环境下则会发生争用，因此通常用于单线程环境，退化为读入-计算-写出的简单流程。
 			%# 语法
@@ -131,7 +131,6 @@ classdef BlockRWStream<handle
 			% Data，读写器返回的数据块。实际读入操作由读写器实现，因此实际数据块大小不一定符合要求。BlockRWStream只对读写器提出建议，不检查其返回值。此外，如果所有文件已读完，将返回missing。
 			% BlockIndex，数据块的唯一标识符。执行完计算后应将结果同此标识符一并返还给BlockRWStream.LocalWriteBlock，这样才能实现正确的结果收集和写出。如果所有文件已读完，将返回missing，可用ismissing是否应该结束计算线程。
 			%See also ParallelComputing.BlockRWStream.LocalWriteBlock missing ismissing
-% 			obj.ReadMutex.poll(Inf);
 			if obj.ObjectsRead<obj.NumObjects
 				ObjectIndex=obj.ObjectsRead+1;
 				Reader=obj.ObjectTable.RWer{ObjectIndex};
@@ -139,8 +138,14 @@ classdef BlockRWStream<handle
 				StartPiece=obj.PiecesRead+1;
 				Data=Reader.Read(StartPiece,EndPiece);
 				obj.BlocksRead=obj.BlocksRead+1;
+				BlockIndex=obj.BlocksRead;
+				if ObjectIndex>LastObjectIndex
+					ObjectData=Reader.ProcessData;
+				else
+					ObjectData=missing;
+				end
 				if nargin>2
-					ReturnQueue.send({Data,obj.BlocksRead});
+					ReturnQueue.send({Data,BlockIndex,ObjectIndex,ObjectData});
 				end
 				obj.ObjectTable.BlocksRead(ObjectIndex)=obj.ObjectTable.BlocksRead(ObjectIndex)+1;
 				if height(obj.BlockTable)<obj.BlocksRead
@@ -157,12 +162,11 @@ classdef BlockRWStream<handle
 					obj.NextObject;
 				end
 			else
-				[Data,BlockIndex]=deal(missing);
+				[Data,BlockIndex,ObjectIndex,ObjectData]=deal(missing);
 				if nargin>2
-					ReturnQueue.send({Data,BlockIndex});
+					ReturnQueue.send({Data,BlockIndex,ObjectIndex,ObjectData});
 				end
 			end
-% 			obj.ReadMutex.send([]);
 		end
 		function LocalWriteBlock(obj,Data,BlockIndex)
 			%在单线程环境下，写出一个数据块。
@@ -173,7 +177,6 @@ classdef BlockRWStream<handle
 			% Data，数据块处理后的计算结果。可以用元胞数组包含多个复杂的结果。此参数将被直接交给读写器的Write方法。
 			% BlockIndex，数据块的唯一标识符，从LocalWriteBlock获取，以确保读入数据块和返回计算结果一一对应。
 			%See also ParallelComputing.BlockRWStream.LocalReadBlock
-% 			obj.WriteMutex.poll(Inf);
 			ObjectIndex=obj.BlockTable.ObjectIndex(BlockIndex);
 			Writer=obj.ObjectTable.RWer{ObjectIndex};
 			obj.BlockTable.ReturnData{BlockIndex}=Writer.Write(Data,obj.BlockTable.StartPiece(BlockIndex),obj.BlockTable.EndPiece(BlockIndex));
@@ -182,7 +185,6 @@ classdef BlockRWStream<handle
 				delete(Writer);
 			end
 			obj.ObjectTable.BlocksWritten(ObjectIndex)=BlocksWritten;
-% 			obj.WriteMutex.send([]);
 		end
 		function [CollectData,Metadata]=CollectReturn(obj)
 			%所有计算线程结束后，由主线程调用此方法，收集返回的计算结果。
@@ -197,7 +199,7 @@ classdef BlockRWStream<handle
 	end
 	%% 远程
 	methods
-		function IPollable=RemoteReadAsync(obj,ReadSize)
+		function IPollable=RemoteReadAsync(obj,ReadSize,LastObjectIndex)
 			%在计算线程上，向I/O线程异步请求读入一个数据块。异步请求不会等待，而是先返回继续执行别的代码，等需要数据时再提取结果。
 			%此方法可以在并行计算线程（parfor spmd parfeval 等）上调用，但会在I/O主线程上执行读入操作，然后将数据返回给计算线程。
 			%# 语法
@@ -214,9 +216,9 @@ classdef BlockRWStream<handle
 			% IPollable(1,1)parallel.pool.PollableDataQueue，可等待的数据队列。需要数据时，调用其poll成员方法可以取得数据。poll将返回1×2元胞行向量，分别包含RemoteReadBlock的两个返回值。
 			%See also ParallelComputing.BlockRWStream.RemoteReadBlock parallel.pool.PollableDataQueue.poll
 			IPollable=parallel.pool.PollableDataQueue;
-			obj.RequestQueue.send({'LocalReadBlock',ReadSize,IPollable});
+			obj.RequestQueue.send({'LocalReadBlock',ReadSize,LastObjectIndex,IPollable});
 		end
-		function [Data,Index]=RemoteReadBlock(obj,ReadSize)
+		function [Data,BlockIndex,ObjectIndex,ObjectData]=RemoteReadBlock(obj,ReadSize,LastObjectIndex)
 			%在计算线程上，向I/O线程请求读入一个数据块
 			%此方法可以在并行计算线程（parfor spmd parfeval 等）上调用，但会在I/O主线程上执行读入操作，然后将数据返回给计算线程。
 			%# 语法
@@ -227,8 +229,8 @@ classdef BlockRWStream<handle
 			% Data，读写器返回的数据块。实际读入操作由读写器实现，因此实际数据块大小不一定符合要求。BlockRWStream只对读写器提出建议，不检查其返回值。此外，如果所有文件已读完，将返回missing。
 			% BlockIndex，数据块的唯一标识符。执行完计算后应将结果同此标识符一并返还给BlockRWStream.RemoteWriteBlock，这样才能实现正确的结果收集和写出。如果所有文件已读完，将返回missing，可用ismissing是否应该结束计算线程。
 			%See also ParallelComputing.BlockRWStream.RemoteWriteBlock missing ismissing
-			varargout=obj.RemoteReadAsync(ReadSize).poll(Inf);
-			[Data,Index]=varargout{:};
+			varargout=obj.RemoteReadAsync(ReadSize,LastObjectIndex).poll(Inf);
+			[Data,BlockIndex,ObjectIndex,ObjectData]=varargout{:};
 		end
 		function RemoteWriteBlock(obj,Data,Index)
 			%在计算线程上，向I/O线程请求写出一个数据块
