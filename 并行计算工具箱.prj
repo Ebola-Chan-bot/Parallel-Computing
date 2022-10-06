@@ -1,17 +1,19 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="3680000990" file="C:\Users\张天夫\Documents\MATLAB\并行计算\并行计算工具箱.prj" location="C:\Users\张天夫\Documents\MATLAB\并行计算" name="并行计算工具箱" target="target.toolbox" target-name="打包为工具箱">
+  <configuration build-checksum="3680000990" file="C:\Users\vhtmf\Documents\MATLAB\并行计算\并行计算工具箱.prj" location="C:\Users\vhtmf\Documents\MATLAB\并行计算" name="并行计算工具箱" target="target.toolbox" target-name="打包为工具箱">
     <param.appname>并行计算</param.appname>
     <param.authnamewatermark>埃博拉酱</param.authnamewatermark>
     <param.email>vhtmfu@outlook.com</param.email>
     <param.company>一致行动党</param.company>
     <param.summary>埃博拉酱的并行计算工具箱，提供一系列实用的并行计算辅助功能：
 为无法一次性全部读入内存的大文件，提供单线程读写、多线程计算的解决方案
-远程调用句柄。无论在哪个线程上调用，都会在创建对象的线程上执行
-替官方修复MATLAB在含有非ASCII字符的主机名的主机上不能启动并行池的bug</param.summary>
+替官方修复MATLAB在含有非ASCII字符的主机名的主机上不能启动并行池的bug
+自动分配空闲GPU
+……</param.summary>
     <param.description>为无法一次性全部读入内存的大文件，提供单线程读写、多线程计算的解决方案
 远程调用句柄。无论在哪个线程上调用，都会在创建对象的线程上执行
 替官方修复含有非ASCII字符的主机名的主机不能启动并行池的问题
-内置parpool函数的增强版，可选保留当前配置不变</param.description>
+内置parpool函数的增强版，可选保留当前配置不变
+自动分配空闲GPU</param.description>
     <param.screenshot>${PROJECT_ROOT}\工具箱图像.jpg</param.screenshot>
     <param.version>4.0.0</param.version>
     <param.output>${PROJECT_ROOT}\并行计算.mltbx</param.output>
@@ -62,7 +64,7 @@ resources/project
     <param.exported.on.package>false</param.exported.on.package>
     <param.required.addons>
       <requiredaddons>
-        <requiredAddOn earliest="2.1.0" fromRepository="true" id="372e4ea1-e356-4ee7-a94f-b1790b6318d9" include="false" latest="latest">并行计算</requiredAddOn>
+        <requiredAddOn earliest="9.6.0" fromRepository="true" id="b344599a-983e-4a6c-bd99-ed3a1bdd9626" include="true" latest="latest">埃博拉酱 的 MATLAB 扩展 Extension</requiredAddOn>
       </requiredaddons>
     </param.required.addons>
     <param.matlab.project.id />
@@ -118,12 +120,19 @@ resources/project
     <fileset.depfun.excluded />
     <fileset.package />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="并行计算.mltbx" optional="false">C:\Users\张天夫\Documents\MATLAB\并行计算\并行计算.mltbx</file>
+      <file location="${PROJECT_ROOT}" name="并行计算.mltbx" optional="false">C:\Users\vhtmf\Documents\MATLAB\并行计算\并行计算.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>
       <root>C:\Program Files\MATLAB\R2022b</root>
-      <toolboxes />
+      <toolboxes>
+        <toolbox name="matlabcoder" />
+      </toolboxes>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
     </matlab>
     <platform>
       <unix>false</unix>
