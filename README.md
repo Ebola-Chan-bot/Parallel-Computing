@@ -1,6 +1,4 @@
 埃博拉酱的并行计算工具箱，提供一系列实用的并行计算辅助功能
-
-本项目的发布版本号遵循[语义化版本](https://semver.org/lang/zh-CN/)规范。开发者认为这是一个优秀的规范，并向每一位开发者推荐遵守此规范。
 # 目录
 本包中所有函数均在ParallelComputing命名空间下，使用前需import。使用命名空间是一个好习惯，可以有效防止命名冲突，避免编码时不必要的代码提示干扰。
 ```MATLAB
@@ -35,6 +33,9 @@ classdef BlockRWStream<handle
 	methods(Access=protected)
 		function NextObject(obj)
 			%打开新的文件以供读取。此方法只有在BlockRWStream刚刚构建完毕，以及上一个文件读取完毕后才被内部调用。但需要检查是否所有文件已经读完。
+		end
+		function ToCollect=WriteReturn(~,Data,StartPiece,EndPiece,Writer)
+			%支持自定义重写，决定如何处理LocalWriteBlock数据
 		end
 	end
 	methods
@@ -74,8 +75,10 @@ classdef(Abstract)IBlockRWer<handle
 		PieceSize double
 		%必须实现的抽象属性，指示文件中有多少个数据片。BlockRWStream将根据此属性判断是否已读取完该文件。
 		NumPieces double
-		%必须实现的抽象属性，专属于该文件的元数据信息。BlockRWStream将在打开每个文件时收集该元数据。如果文件没有元数据，可以不设置此属性的值。
-		Metadata
+		%文件特定、无关分块的，需要收集的数据。BlockRWStream将在打开每个文件时收集该数据，然后在CollectReturn时一并返回。如果文件没有需要收集的数据，可以不设置此属性的值。
+		CollectData
+		%文件特定、在块间共享的，处理过程所必需的数据。如果没有这样的数据，可以不设置此属性的值。但如果要用于BlockRWStream.SpmdRun自动调度，必须指定一个空元胞表示没有数据，否则SpmdRun会将一个空数组作为独立参数。
+		ProcessData
 	end
 	methods(Abstract)
 		%必须实现的抽象成员方法，用于读取指定的数据块。
@@ -108,8 +111,10 @@ end
 ```
 函数
 ```MATLAB
+%分配空闲GPU
+function [ID,Memory] = AllocateIdleGpus
 %修复含有非ASCII字符的主机名的主机不能启动并行池的问题
-function NonAsciiHostnameParpoolFix
+function NonAsciiHostnameParpoolFix(RestartMatlab)
 %内置parpool函数的增强版，可选保留当前配置不变
 function Pool = ParPool(options)
 ```

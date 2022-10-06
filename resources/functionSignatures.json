@@ -13,6 +13,40 @@
 			}
 		]
 	},
+	"ParallelComputing.BlockRWStream.WriteReturn": {
+		"inputs": [
+			{
+				"name": "obj",
+				"kind": "required"
+			},
+			{
+				"name": "Data",
+				"kind": "required",
+				"purpose": "从 Local/Remote WriteBlock 传来的数据"
+			},
+			{
+				"name": "StartPiece",
+				"kind": "required",
+				"type": "positive",
+				"purpose": "首数据片"
+			},
+			{
+				"name": "EndPiece",
+				"kind": "required",
+				"type": "positive",
+				"purpose": "尾数据片"
+			},
+			{
+				"name": "Writer",
+				"kind": "required",
+				"type": [
+					"ParallelComputing.IBlockRWer",
+					"scalar"
+				],
+				"purpose": "用户定义的读写器对象"
+			}
+		]
+	},
 	"ParallelComputing.BlockRWStream.LocalReadBlock": {
 		"inputs": [
 			{
@@ -24,6 +58,12 @@
 				"kind": "required",
 				"type": "positive",
 				"purpose": "建议读入的字节数"
+			},
+			{
+				"name": "LastObjectIndex",
+				"kind": "ordered",
+				"type": "positive",
+				"purpose": "上次调用返回的ObjectIndex"
 			}
 		]
 	},
@@ -57,6 +97,12 @@
 				"kind": "required",
 				"type": "positive",
 				"purpose": "建议读入的字节数"
+			},
+			{
+				"name": "LastObjectIndex",
+				"kind": "ordered",
+				"type": "positive",
+				"purpose": "上次调用返回的ObjectIndex"
 			}
 		]
 	},
@@ -71,6 +117,12 @@
 				"kind": "required",
 				"type": "positive",
 				"purpose": "建议读入的字节数"
+			},
+			{
+				"name": "LastObjectIndex",
+				"kind": "ordered",
+				"type": "positive",
+				"purpose": "上次调用返回的ObjectIndex"
 			}
 		]
 	},
@@ -123,7 +175,20 @@
 				"name": "RuntimeCost",
 				"kind": "namevalue",
 				"type": "positive",
-				"purpose": "运行时实际将要占用的内存是数据块的多少倍"
+				"purpose": "运行时实际将要占用的内存是数据块的多少倍",
+				"default": 1
+			},
+			{
+				"name": "CpuRC",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "CPU特定的RuntimeCost"
+			},
+			{
+				"name": "GpuRC",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "GPU特定的RuntimeCost"
 			},
 			{
 				"name": "NumGpuArguments",
@@ -133,6 +198,26 @@
 					"scalar"
 				],
 				"purpose": "前几个数据块参数要送入GPU运行"
+			},
+			{
+				"name": "Parallel",
+				"kind": "namevalue",
+				"type": [
+					"logical",
+					"scalar"
+				],
+				"purpose": "是否并行计算",
+				"default": true
+			},
+			{
+				"name": "WorkerCost",
+				"kind": "namevalue",
+				"type": [
+					"real",
+					"scalar"
+				],
+				"purpose": "每个计算线程额外占用的内存字节数",
+				"default": 0
 			}
 		]
 	},
@@ -217,6 +302,20 @@
 				"kind": "ordered",
 				"purpose": "输入参数",
 				"repeating": true
+			}
+		]
+	},
+	"ParallelComputing.NonAsciiHostnameParpoolFix": {
+		"inputs": [
+			{
+				"name": "RestartMatlab",
+				"kind": "ordered",
+				"type": [
+					"logical",
+					"scalar"
+				],
+				"purpose": "修复后是否立即重启MATLAB",
+				"default": false
 			}
 		]
 	},
