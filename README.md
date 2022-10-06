@@ -5,6 +5,7 @@
 import ParallelComputing.*
 ```
 每个代码文件内都有详细文档，此处只列举公开接口简介。详情可用doc命令查询。
+
 类
 ```MATLAB
 classdef BlockRWStream<handle
