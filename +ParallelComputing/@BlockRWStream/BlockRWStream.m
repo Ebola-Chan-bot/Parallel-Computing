@@ -94,8 +94,12 @@ classdef BlockRWStream<handle
 			if Index<=obj.NumObjects
 				obj.PiecesRead=0;
 				RWer=obj.GetRWer(obj.RWObjects(Index));
-				obj.ObjectTable(Index,1:2)={{RWer.Metadata},{RWer}};
+				obj.ObjectTable(Index,1:2)={{RWer.CollectData},{RWer}};
 			end
+		end
+		function ToCollect=WriteReturn(~,Data,StartPiece,EndPiece,Writer)
+			%支持自定义重写，决定如何处理返回数据
+			ToCollect=Writer.Write(Data,StartPiece,EndPiece);
 		end
 	end
 	methods
@@ -131,11 +135,21 @@ classdef BlockRWStream<handle
 			% Data，读写器返回的数据块。实际读入操作由读写器实现，因此实际数据块大小不一定符合要求。BlockRWStream只对读写器提出建议，不检查其返回值。此外，如果所有文件已读完，将返回missing。
 			% BlockIndex，数据块的唯一标识符。执行完计算后应将结果同此标识符一并返还给BlockRWStream.LocalWriteBlock，这样才能实现正确的结果收集和写出。如果所有文件已读完，将返回missing，可用ismissing是否应该结束计算线程。
 			%See also ParallelComputing.BlockRWStream.LocalWriteBlock missing ismissing
+			import ParallelComputing.ParallelException
+			RemoteCall=nargin>3;
 			if obj.ObjectsRead<obj.NumObjects
 				ObjectIndex=obj.ObjectsRead+1;
 				Reader=obj.ObjectTable.RWer{ObjectIndex};
 				EndPiece=min(obj.PiecesRead+floor(ReadSize/Reader.PieceSize),Reader.NumPieces);
 				StartPiece=obj.PiecesRead+1;
+				if StartPiece>EndPiece
+					if RemoteCall
+						ReturnQueue.send({ParallelException.ReadSize_is_smaller_than_IBlockRWer_PieceSize});
+						return
+					else
+						ParallelException.ReadSize_is_smaller_than_IBlockRWer_PieceSize.Throw('如果使用SpmdRun时出现此错误，可能需要考虑禁用低内存的GPU设备，或减少RuntimeCost');
+					end
+				end
 				Data=Reader.Read(StartPiece,EndPiece);
 				obj.BlocksRead=obj.BlocksRead+1;
 				BlockIndex=obj.BlocksRead;
@@ -144,8 +158,8 @@ classdef BlockRWStream<handle
 				else
 					ObjectData=missing;
 				end
-				if nargin>2
-					ReturnQueue.send({Data,BlockIndex,ObjectIndex,ObjectData});
+				if RemoteCall
+					ReturnQueue.send({ParallelException.Operation_succeeded,Data,BlockIndex,ObjectIndex,ObjectData});
 				end
 				obj.ObjectTable.BlocksRead(ObjectIndex)=obj.ObjectTable.BlocksRead(ObjectIndex)+1;
 				if height(obj.BlockTable)<obj.BlocksRead
@@ -163,8 +177,8 @@ classdef BlockRWStream<handle
 				end
 			else
 				[Data,BlockIndex,ObjectIndex,ObjectData]=deal(missing);
-				if nargin>2
-					ReturnQueue.send({Data,BlockIndex,ObjectIndex,ObjectData});
+				if RemoteCall
+					ReturnQueue.send({ParallelException.All_objects_have_been_read,Data,BlockIndex,ObjectIndex,ObjectData});
 				end
 			end
 		end
@@ -179,7 +193,7 @@ classdef BlockRWStream<handle
 			%See also ParallelComputing.BlockRWStream.LocalReadBlock
 			ObjectIndex=obj.BlockTable.ObjectIndex(BlockIndex);
 			Writer=obj.ObjectTable.RWer{ObjectIndex};
-			obj.BlockTable.ReturnData{BlockIndex}=Writer.Write(Data,obj.BlockTable.StartPiece(BlockIndex),obj.BlockTable.EndPiece(BlockIndex));
+			obj.BlockTable.ReturnData{BlockIndex}=obj.WriteReturn(Data,obj.BlockTable.StartPiece(BlockIndex),obj.BlockTable.EndPiece(BlockIndex),Writer);
 			BlocksWritten=obj.ObjectTable.BlocksWritten(ObjectIndex)+1;
 			if BlocksWritten==obj.ObjectTable.BlocksRead(ObjectIndex)&&obj.ObjectsRead>=ObjectIndex
 				delete(Writer);
@@ -218,7 +232,7 @@ classdef BlockRWStream<handle
 			IPollable=parallel.pool.PollableDataQueue;
 			obj.RequestQueue.send({'LocalReadBlock',ReadSize,LastObjectIndex,IPollable});
 		end
-		function [Data,BlockIndex,ObjectIndex,ObjectData]=RemoteReadBlock(obj,ReadSize,LastObjectIndex)
+		function varargout=RemoteReadBlock(obj,ReadSize,LastObjectIndex)
 			%在计算线程上，向I/O线程请求读入一个数据块
 			%此方法可以在并行计算线程（parfor spmd parfeval 等）上调用，但会在I/O主线程上执行读入操作，然后将数据返回给计算线程。
 			%# 语法
@@ -230,7 +244,9 @@ classdef BlockRWStream<handle
 			% BlockIndex，数据块的唯一标识符。执行完计算后应将结果同此标识符一并返还给BlockRWStream.RemoteWriteBlock，这样才能实现正确的结果收集和写出。如果所有文件已读完，将返回missing，可用ismissing是否应该结束计算线程。
 			%See also ParallelComputing.BlockRWStream.RemoteWriteBlock missing ismissing
 			varargout=obj.RemoteReadAsync(ReadSize,LastObjectIndex).poll(Inf);
-			[Data,BlockIndex,ObjectIndex,ObjectData]=varargout{:};
+			if numel(varargout)==1
+				varargout{1}.Throw;
+			end
 		end
 		function RemoteWriteBlock(obj,Data,Index)
 			%在计算线程上，向I/O线程请求写出一个数据块
