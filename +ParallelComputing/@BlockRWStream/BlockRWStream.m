@@ -193,7 +193,7 @@ classdef BlockRWStream<handle
 	end
 	%% 远程
 	methods
-		function IPollable=RemoteReadAsync(obj,ReadSize,varargin)
+		function IPollable=RemoteReadAsync(obj,varargin)
 			%在计算线程上，向I/O线程异步请求读入一个数据块。异步请求不会等待，而是先返回继续执行别的代码，等需要数据时再提取结果。
 			%此方法可以在并行计算线程（parfor spmd parfeval 等）上调用，但会在I/O主线程上执行读入操作，然后将数据返回给计算线程。主线程上实际执行的是LocalReadBlock。
 			%# 语法
@@ -250,14 +250,14 @@ classdef BlockRWStream<handle
 			%  如果操作成功，后续元胞内依次排列LocalReadBlock的各个返回值。
 			%See also ParallelComputing.BlockRWStream.LocalReadBlock parallel.pool.PollableDataQueue.poll ParallelComputing.ParallelException
 			IPollable=parallel.pool.PollableDataQueue;
-			obj.RequestQueue.send([{'LocalReadBlock',ReadSize},varargin,{IPollable}]);
+			obj.RequestQueue.send([{'LocalReadBlock',IPollable},varargin]);
 		end
-		function varargout=RemoteReadBlock(obj,ReadSize,LastObjectIndex)
+		function varargout=RemoteReadBlock(obj,varargin)
 			%在计算线程上，向I/O线程请求读入一个数据块
 			%此方法可以在并行计算线程（parfor spmd parfeval 等）上调用，但会在I/O主线程上执行读入操作，然后将数据返回给计算线程。主线程上实际执行的是LocalReadBlock。
 			% 因此，此方法的输入参数和返回值与LocalReadBlock完全相同。此处不再赘述。
 			%See also ParallelComputing.BlockRWStream.LocalReadBlock
-			varargout=obj.RemoteReadAsync(ReadSize,LastObjectIndex).poll(Inf);
+			varargout=obj.RemoteReadAsync(varargin{:}).poll(Inf);
 			if numel(varargout)==1
 				varargout{1}.Throw;
 			end
