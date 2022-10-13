@@ -54,16 +54,36 @@
 				"kind": "required"
 			},
 			{
-				"name": "ReadSize",
-				"kind": "required",
-				"type": "positive",
-				"purpose": "建议读入的字节数"
-			},
-			{
-				"name": "LastObjectIndex",
-				"kind": "ordered",
-				"type": "positive",
-				"purpose": "上次调用返回的ObjectIndex"
+				"mutuallyExclusiveGroup":[
+					[
+						{
+							"name": "ReadBytes",
+							"kind": "namevalue",
+							"type": "positive",
+							"purpose": "建议读入的字节数"
+						},
+						{
+							"name": "LastObjectIndex",
+							"kind": "namevalue",
+							"type": "positive",
+							"purpose": "上次调用返回的ObjectIndex"
+						}
+					],
+					[
+						{
+							"name": "ReadSize",
+							"kind": "namevalue",
+							"type": "positive",
+							"purpose": "建议读入的数据片数"
+						},
+						{
+							"name": "LastObjectIndex",
+							"kind": "namevalue",
+							"type": "positive",
+							"purpose": "上次调用返回的ObjectIndex"
+						}
+					]
+				]
 			}
 		]
 	},
@@ -93,16 +113,36 @@
 				"kind": "required"
 			},
 			{
-				"name": "ReadSize",
-				"kind": "required",
-				"type": "positive",
-				"purpose": "建议读入的字节数"
-			},
-			{
-				"name": "LastObjectIndex",
-				"kind": "ordered",
-				"type": "positive",
-				"purpose": "上次调用返回的ObjectIndex"
+				"mutuallyExclusiveGroup":[
+					[
+						{
+							"name": "ReadBytes",
+							"kind": "namevalue",
+							"type": "positive",
+							"purpose": "建议读入的字节数"
+						},
+						{
+							"name": "LastObjectIndex",
+							"kind": "namevalue",
+							"type": "positive",
+							"purpose": "上次调用返回的ObjectIndex"
+						}
+					],
+					[
+						{
+							"name": "ReadSize",
+							"kind": "namevalue",
+							"type": "positive",
+							"purpose": "建议读入的数据片数"
+						},
+						{
+							"name": "LastObjectIndex",
+							"kind": "namevalue",
+							"type": "positive",
+							"purpose": "上次调用返回的ObjectIndex"
+						}
+					]
+				]
 			}
 		]
 	},
@@ -113,16 +153,36 @@
 				"kind": "required"
 			},
 			{
-				"name": "ReadSize",
-				"kind": "required",
-				"type": "positive",
-				"purpose": "建议读入的字节数"
-			},
-			{
-				"name": "LastObjectIndex",
-				"kind": "ordered",
-				"type": "positive",
-				"purpose": "上次调用返回的ObjectIndex"
+				"mutuallyExclusiveGroup":[
+					[
+						{
+							"name": "ReadBytes",
+							"kind": "namevalue",
+							"type": "positive",
+							"purpose": "建议读入的字节数"
+						},
+						{
+							"name": "LastObjectIndex",
+							"kind": "namevalue",
+							"type": "positive",
+							"purpose": "上次调用返回的ObjectIndex"
+						}
+					],
+					[
+						{
+							"name": "ReadSize",
+							"kind": "namevalue",
+							"type": "positive",
+							"purpose": "建议读入的数据片数"
+						},
+						{
+							"name": "LastObjectIndex",
+							"kind": "namevalue",
+							"type": "positive",
+							"purpose": "上次调用返回的ObjectIndex"
+						}
+					]
+				]
 			}
 		]
 	},

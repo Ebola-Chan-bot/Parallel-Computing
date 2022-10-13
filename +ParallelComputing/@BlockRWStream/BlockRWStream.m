@@ -199,16 +199,17 @@ classdef BlockRWStream<handle
 			%# 语法
 			% 本方法输入参数实际上和LocalReadBlock相同。返回值则是一个可等待对象，用于异步接收LocalReadBlock的返回值。
 			% ```
-			% IPollable=obj.RemoteReadBlock(ReadSize);
-			% IPollable=obj.RemoteReadBlock(ReadSize,LastObjectIndex);
+			% IPollable=obj.RemoteReadBlock(ReadSize=ReadSize);
+			% IPollable=obj.RemoteReadBlock(ReadBytes=ReadBytes);
+			% IPollable=obj.RemoteReadBlock(___,LastObjectIndex=LastObjectIndex);
 			% ``
 			%# 示例
-			% 此示例与LocalReadBlock的示例类似，但展现了异步工作流，使得I/O和数据库里得以并行执行。
+			% 此示例与LocalReadBlock的示例类似，但展现了异步工作流，使得I/O和数据处理得以并行执行。
 			% ```
 			% function Example(obj,Memory,BlockProcess)
 			% ObjectIndex=0;
 			%
-			% ArgOuts=obj.RemoteReadAsync(Memory,ObjectIndex).poll(Inf);
+			% ArgOuts=obj.RemoteReadAsync(ReadSize=Memory,LastObjectIndex=ObjectIndex).poll(Inf);
 			% %首次调用直接poll取得返回值
 			%
 			% if ArgOuts{1}~=ParallelComputing.ParallelException.Operation_succeeded
@@ -218,7 +219,7 @@ classdef BlockRWStream<handle
 			% [Data,BlockIndex,NewOI,NewOD]=ArgOuts{2:end};
 			% while ~ismissing(Data)
 			%
-			%	IPollable=obj.RemoteReadAsync(Memory,ObjectIndex);
+			%	IPollable=obj.RemoteReadAsync(ReadSize=Memory,LastObjectIndex=ObjectIndex);
 			%	%注意此时尚未处理刚刚读到的数据就可以直接请求下一块数据，此请求可以不等待数据实际读完就立刻返回IPollable对象。这样接下来可以不必等待主线程忙于读入数据
 			%	% 的时间，利用这段时间处理上次读入的数据块。
 			%

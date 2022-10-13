@@ -43,7 +43,7 @@ classdef BlockRWStream<handle
 		function obj = BlockRWStream(RWObjects,GetRWer)
 			%构造方法。需要提供文件列表和获取读写器的函数句柄。
 		end
-		function [Data,BlockIndex]=LocalReadBlock(obj,ReadSize,ReturnQueue)
+		function function [Data,BlockIndex,ObjectIndex,ObjectData]=LocalReadBlock(obj,ReturnQueue,options)
 			%在单进程环境下，读入一个数据块。
 		end
 		function LocalWriteBlock(obj,Data,BlockIndex)
@@ -58,10 +58,10 @@ classdef BlockRWStream<handle
 	end
 	%% 远程
 	methods
-		function IPollable=RemoteReadAsync(obj,ReadSize)
+		function IPollable=RemoteReadAsync(obj,varargin)
 			%在计算线程上，向I/O线程异步请求读入一个数据块。异步请求不会等待，而是先返回继续执行别的代码，等需要数据时再提取结果。
 		end
-		function [Data,Index]=RemoteReadBlock(obj,ReadSize)
+		function varargout=RemoteReadBlock(obj,varargin)
 			%在计算线程上，向I/O线程请求读入一个数据块
 		end
 		function RemoteWriteBlock(obj,Data,Index)
