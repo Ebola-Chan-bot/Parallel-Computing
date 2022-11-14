@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="3680000990" file="C:\Users\vhtmf\Documents\MATLAB\并行计算\并行计算工具箱.prj" location="C:\Users\vhtmf\Documents\MATLAB\并行计算" name="并行计算工具箱" target="target.toolbox" target-name="打包为工具箱">
+  <configuration build-checksum="3680000990" file="C:\Users\张天夫\Documents\MATLAB\并行计算\并行计算工具箱.prj" location="C:\Users\张天夫\Documents\MATLAB\并行计算" name="并行计算工具箱" target="target.toolbox" target-name="打包为工具箱">
     <param.appname>并行计算</param.appname>
     <param.authnamewatermark>埃博拉酱</param.authnamewatermark>
     <param.email>vhtmfu@outlook.com</param.email>
@@ -7,24 +7,27 @@
     <param.summary>埃博拉酱的并行计算工具箱，提供一系列实用的并行计算辅助功能：
 为无法一次性全部读入内存的大文件，提供单线程读写、多线程计算的解决方案
 替官方修复MATLAB在含有非ASCII字符的主机名的主机上不能启动并行池的bug
-自动分配空闲GPU
+将指定的GPU分配到并行进程
 ……</param.summary>
     <param.description>为无法一次性全部读入内存的大文件，提供单线程读写、多线程计算的解决方案
 远程调用句柄。无论在哪个线程上调用，都会在创建对象的线程上执行
 替官方修复含有非ASCII字符的主机名的主机不能启动并行池的问题
 内置parpool函数的增强版，可选保留当前配置不变
-自动分配空闲GPU</param.description>
+将指定的GPU分配到并行进程</param.description>
     <param.screenshot>${PROJECT_ROOT}\工具箱图像.jpg</param.screenshot>
-    <param.version>5.0.1</param.version>
+    <param.version>6.0.0</param.version>
     <param.output>${PROJECT_ROOT}\并行计算.mltbx</param.output>
     <param.products.name>
       <item>Parallel Computing Toolbox</item>
+      <item>Statistics and Machine Learning Toolbox</item>
     </param.products.name>
     <param.products.id>
       <item>80</item>
+      <item>19</item>
     </param.products.id>
     <param.products.version>
       <item>7.7</item>
+      <item>12.4</item>
     </param.products.version>
     <param.platforms />
     <param.guid>372e4ea1-e356-4ee7-a94f-b1790b6318d9</param.guid>
@@ -120,19 +123,12 @@ resources/project
     <fileset.depfun.excluded />
     <fileset.package />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="并行计算.mltbx" optional="false">C:\Users\vhtmf\Documents\MATLAB\并行计算\并行计算.mltbx</file>
+      <file location="${PROJECT_ROOT}" name="并行计算.mltbx" optional="false">C:\Users\张天夫\Documents\MATLAB\并行计算\并行计算.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>
       <root>C:\Program Files\MATLAB\R2022b</root>
-      <toolboxes>
-        <toolbox name="matlabcoder" />
-      </toolboxes>
-      <toolbox>
-        <matlabcoder>
-          <enabled>true</enabled>
-        </matlabcoder>
-      </toolbox>
+      <toolboxes />
     </matlab>
     <platform>
       <unix>false</unix>

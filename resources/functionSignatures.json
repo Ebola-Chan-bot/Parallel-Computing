@@ -278,6 +278,18 @@
 				],
 				"purpose": "每个计算线程额外占用的内存字节数",
 				"default": 0
+			},
+			{
+				"name":"BlockSize",
+				"kind":"namevalue",
+				"type":"positive",
+				"purpose":"手动强制指定每个块的大小"
+			},
+			{
+				"name":"UseGpu",
+				"kind":"namevalue",
+				"type":["real","vector"],
+				"purpose":"要使用的GPU设备编号"
 			}
 		]
 	},
@@ -362,6 +374,16 @@
 				"kind": "ordered",
 				"purpose": "输入参数",
 				"repeating": true
+			}
+		]
+	},
+	"ParallelComputing.AssignGPUsToWorkers":{
+		"inputs":[
+			{
+				"name":"UseGpu",
+				"kind":"namevalue",
+				"type":["real","vector"],
+				"purpose":"要使用的GPU编号"
 			}
 		]
 	},

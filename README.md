@@ -112,8 +112,8 @@ end
 ```
 函数
 ```MATLAB
-%分配空闲GPU
-function [ID,Memory] = AllocateIdleGpus
+%将指定的GPU分配到并行进程
+function AssignGPUsToWorkers(UseGpu)
 %修复含有非ASCII字符的主机名的主机不能启动并行池的问题
 function NonAsciiHostnameParpoolFix(RestartMatlab)
 %内置parpool函数的增强版，可选保留当前配置不变
