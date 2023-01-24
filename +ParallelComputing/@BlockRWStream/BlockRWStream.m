@@ -69,7 +69,7 @@ classdef BlockRWStream<handle
 		%已经读完的数据块总数
 		BlocksRead=0
 		%维护每个数据块的信息表
-		BlockTable=table('Size',[0,4],'VariableTypes',["uint16","uint16","uint16","cell"],'VariableNames',["ObjectIndex","StartPiece","EndPiece","ReturnData"])
+		BlockTable=table('Size',[0,4],'VariableTypes',["uint16","uint32","uint32","cell"],'VariableNames',["ObjectIndex","StartPiece","EndPiece","ReturnData"])
 		%维护每个文件的信息表
 		ObjectTable
 	end
@@ -131,8 +131,8 @@ classdef BlockRWStream<handle
 			% obj(1,1)BlockRWStream，类对象实例本身
 			% Data，从 Local/Remote WriteBlock 传来的数据，数据类型格式由调用时用户指定。这些数据通常应作为块处理函数的返回值供输出。如果您使用BlockRWStream.SpmdRun
 			%  方法，此参数必定是元胞行向量，每个元胞内存放一个SpmdRun.BlockProcess参数的返回值。即使BlockProcess只有1个返回值，SpmdRun也会将它包装在元胞中。
-			% StartPiece(1,1)uint16，首数据片
-			% EndPiece(1,1)uint16，尾数据片
+			% StartPiece(1,1)uint32，首数据片
+			% EndPiece(1,1)uint32，尾数据片
 			% Writer(1,1)IBlockRWer，用户定义的读写器对象，用于写出数据。应当实现Write方法。
 			%# 返回值
 			% ToCollect，要返回给基类收集的数据。这些数据将被CollectReturn方法返回。
