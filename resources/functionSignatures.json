@@ -407,10 +407,79 @@
 				"mutuallyExclusiveGroup": [
 					[
 						{
+							"name": "ProfileName",
+							"kind": "ordered",
+							"type": [
+								[
+									"char",
+									"row"
+								],
+								[
+									"string",
+									"scalar"
+								]
+							],
+							"purpose": "强制应用配置"
+						},
+						{
+							"name": "PoolSize",
+							"kind": "ordered",
+							"type": "positive",
+							"purpose": "强制应用尺寸"
+						}
+					],
+					[
+						{
+							"name": "PoolSize",
+							"kind": "ordered",
+							"type": "positive",
+							"purpose": "强制应用尺寸"
+						},
+						{
+							"name": "ProfileName",
+							"kind": "ordered",
+							"type": [
+								[
+									"char",
+									"row"
+								],
+								[
+									"string",
+									"scalar"
+								]
+							],
+							"purpose": "强制应用配置"
+						}
+					],
+					[
+						{
+							"name": "ProfileName",
+							"kind": "ordered",
+							"type": [
+								[
+									"char",
+									"row"
+								],
+								[
+									"string",
+									"scalar"
+								]
+							],
+							"purpose": "强制应用配置"
+						},
+						{
 							"name": "PoolSize",
 							"kind": "namevalue",
 							"type": "positive",
-							"purpose": "强制指定并行池尺寸"
+							"purpose": "建议应用尺寸"
+						}
+					],
+					[
+						{
+							"name": "PoolSize",
+							"kind": "ordered",
+							"type": "positive",
+							"purpose": "强制应用尺寸"
 						},
 						{
 							"name": "ProfileName",
@@ -425,39 +494,10 @@
 									"scalar"
 								]
 							],
-							"purpose": "强制指定默认配置名"
+							"purpose": "建议应用配置"
 						}
 					],
 					[
-						{
-							"name": "PoolSize",
-							"kind": "namevalue",
-							"type": "positive",
-							"purpose": "强制指定并行池尺寸"
-						},
-						{
-							"name": "ProfileNameIfNew",
-							"kind": "namevalue",
-							"type": [
-								[
-									"char",
-									"row"
-								],
-								[
-									"string",
-									"scalar"
-								]
-							],
-							"purpose": "建议默认配置名"
-						}
-					],
-					[
-						{
-							"name": "PoolSizeIfNew",
-							"kind": "namevalue",
-							"type": "positive",
-							"purpose": "建议并行池尺寸"
-						},
 						{
 							"name": "ProfileName",
 							"kind": "namevalue",
@@ -471,30 +511,13 @@
 									"scalar"
 								]
 							],
-							"purpose": "强制指定默认配置名"
-						}
-					],
-					[
-						{
-							"name": "ProfileNameIfNew",
-							"kind": "namevalue",
-							"type": [
-								[
-									"char",
-									"row"
-								],
-								[
-									"string",
-									"scalar"
-								]
-							],
-							"purpose": "建议默认配置名"
+							"purpose": "建议应用配置"
 						},
 						{
-							"name": "PoolSizeIfNew",
+							"name": "PoolSize",
 							"kind": "namevalue",
 							"type": "positive",
-							"purpose": "建议并行池尺寸"
+							"purpose": "建议应用尺寸"
 						}
 					]
 				]
