@@ -68,6 +68,8 @@ classdef BlockRWStream<handle
 		PiecesRead
 		%已经读完的数据块总数
 		BlocksRead=0
+	end
+	properties(SetAccess=protected,Transient)
 		%维护每个数据块的信息表
 		BlockTable=table('Size',[0,4],'VariableTypes',["uint16","uint32","uint32","cell"],'VariableNames',["ObjectIndex","StartPiece","EndPiece","ReturnData"])
 		%维护每个文件的信息表
