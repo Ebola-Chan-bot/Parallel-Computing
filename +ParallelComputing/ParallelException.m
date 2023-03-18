@@ -1,4 +1,4 @@
-classdef ParallelException<MATLAB.IEnumerableException
+classdef ParallelException<MATLAB.Lang.IEnumerableException
 	enumeration
 		Operation_succeeded
 		ReadSize_is_smaller_than_IBlockRWer_PieceSize
