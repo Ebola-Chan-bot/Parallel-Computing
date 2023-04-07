@@ -131,7 +131,7 @@ function NonAsciiHostnameParpoolFix(RestartMatlab)
 %内置parpool函数的增强版，可选保留当前配置不变
 function Pool = ParPool(varargin)</param.description>
     <param.screenshot>${PROJECT_ROOT}\工具箱图像.jpg</param.screenshot>
-    <param.version>7.0.3</param.version>
+    <param.version>7.0.4</param.version>
     <param.output>${PROJECT_ROOT}\并行计算.mltbx</param.output>
     <param.products.name>
       <item>Parallel Computing Toolbox</item>
