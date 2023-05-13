@@ -54,7 +54,7 @@
 				"kind": "required"
 			},
 			{
-				"mutuallyExclusiveGroup":[
+				"mutuallyExclusiveGroup": [
 					[
 						{
 							"name": "ReadBytes",
@@ -113,7 +113,7 @@
 				"kind": "required"
 			},
 			{
-				"mutuallyExclusiveGroup":[
+				"mutuallyExclusiveGroup": [
 					[
 						{
 							"name": "ReadBytes",
@@ -153,7 +153,7 @@
 				"kind": "required"
 			},
 			{
-				"mutuallyExclusiveGroup":[
+				"mutuallyExclusiveGroup": [
 					[
 						{
 							"name": "ReadBytes",
@@ -280,16 +280,35 @@
 				"default": 0
 			},
 			{
-				"name":"BlockSize",
-				"kind":"namevalue",
-				"type":"positive",
-				"purpose":"手动强制指定每个块的大小"
+				"name": "BlockSize",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "手动强制指定每个块的大小"
 			},
 			{
-				"name":"UseGpu",
-				"kind":"namevalue",
-				"type":["real","vector"],
-				"purpose":"要使用的GPU设备编号"
+				"name": "UseGpu",
+				"kind": "namevalue",
+				"type": [
+					"real",
+					"vector"
+				],
+				"purpose": "要使用的GPU设备编号"
+			},
+			{
+				"name": "IgnoreException",
+				"kind": "namevalue",
+				"type": [
+					"logical",
+					"scalar"
+				],
+				"purpose": "是否将异常转发为warning",
+				"default": true
+			},
+			{
+				"name": "WatchDogSeconds",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "并行池看门狗忍耐时长"
 			}
 		]
 	},
@@ -338,6 +357,16 @@
 			}
 		]
 	},
+	"ParallelComputing.PoolWatchDog": {
+		"inputs": [
+			{
+				"name": "WatchSeconds",
+				"kind": "required",
+				"type": "positive",
+				"purpose": "看门狗的忍耐秒数"
+			}
+		]
+	},
 	"ParallelComputing.RemoteFunctionHandle": {
 		"inputs": [
 			{
@@ -377,13 +406,16 @@
 			}
 		]
 	},
-	"ParallelComputing.AssignGPUsToWorkers":{
-		"inputs":[
+	"ParallelComputing.AssignGPUsToWorkers": {
+		"inputs": [
 			{
-				"name":"UseGpu",
-				"kind":"namevalue",
-				"type":["real","vector"],
-				"purpose":"要使用的GPU编号"
+				"name": "UseGpu",
+				"kind": "namevalue",
+				"type": [
+					"real",
+					"vector"
+				],
+				"purpose": "要使用的GPU编号"
 			}
 		]
 	},
