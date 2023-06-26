@@ -1,11 +1,73 @@
 % HostNameUtils - A suite of utilities to provide
 % functionalities associated with hostnames.
 
-% Copyright 2014-2022 The MathWorks, Inc.
+% Copyright 2014-2023 The MathWorks, Inc.
 classdef HostNameUtils < handle
     
     methods ( Access = public, Static )
-        
+
+        % Find a loopback address for the local host
+        % version - Desired version of the Internet Protocol returned (4 or
+        % 6). By default this is 4.
+        function loopbackAddress = getLoopbackAddress(version)
+            arguments
+                version {mustBeMember(version, [4, 6])} = 4
+            end
+
+            persistent currentLoopbackAddress;
+            persistent currentVersion;
+
+            if currentVersion == version
+                % Return cached loopback address matching given version
+                loopbackAddress = currentLoopbackAddress;
+                return
+            end
+
+            if version == 4
+                fallbackAddress = '127.0.0.1';
+            else
+                fallbackAddress = '::1';
+            end
+
+            try
+                loopbackAddresses = iLookupLoopbackAddresses(version);
+                if isempty(loopbackAddresses)
+                    dctSchedulerMessage(1, 'Failed to find loopback address. Using default ''%s''', fallbackAddress);
+                    loopbackAddress = fallbackAddress;
+                    return;
+                end
+                if ismember(fallbackAddress, loopbackAddresses)
+                    % Prefer default if found
+                    loopbackAddress = fallbackAddress;
+                else
+                    % All else being equal, pick the first
+                    loopbackAddress = loopbackAddresses{1};
+                end
+                currentLoopbackAddress = loopbackAddress;
+                currentVersion = version;
+            catch E
+                dctSchedulerMessage(1, sprintf('Exception finding loopback address. Using default ''%s''', fallbackAddress), E);
+                loopbackAddress = fallbackAddress;
+            end
+        end
+
+        % Finds all loopback addresses for the given name
+        % version - Desired version of the Internet Protocol returned (4 or
+        % 6). By default this is 4.
+        function loopbackAddresses = getLoopbackAddressesByName(name, version)
+            arguments
+                name {mustBeTextScalar}
+                version {mustBeMember(version, [4, 6])} = 4
+            end
+            try
+                loopbackAddresses = iLookupLoopbackAddressesByName(name, version);
+            catch E
+                dctSchedulerMessage(2, sprintf('Failed to resolve loopback addresses for %s.', ...
+                    name), E);
+                loopbackAddresses = {};
+            end
+        end
+
         % Find the localhost name
         function localHostName = getLocalHostName()
             persistent currentlocalHostName;
@@ -37,6 +99,7 @@ classdef HostNameUtils < handle
         function localCanonicalHostName = getLocalCanonicalHostName()
             persistent currentlocalCanonicalHostName;
             if isempty( currentlocalCanonicalHostName )
+                % If the legitimate way of getting the local canonicalhostname fails, return 'localhost'.
 				currentlocalCanonicalHostName=getenv('COMPUTERNAME');
             end
             localCanonicalHostName = currentlocalCanonicalHostName;
@@ -73,14 +136,13 @@ classdef HostNameUtils < handle
         % version - Desired version of the Internet Protocol returned (4 or
         % 6). By default this is 4.
         function ipAddress = getLocalHostAddress( version )
-            if nargin < 1
-                version = 4;
+            arguments
+                version {mustBeMember(version, [4, 6])} = 4
             end
             
             persistent currentIPAddress;
             persistent currentVersion;
-            
-            assert(any(version == [4 6]), 'Invalid ip version specified. Valid options are 4 or 6');
+
             if currentVersion == version
                 % Return cached ip address matching given version
                 ipAddress = currentIPAddress;
@@ -132,7 +194,12 @@ function hostIP = iLookupHostIPAddress(version)
 % This is required to ensure that local processes which do not actually
 % require a valid address can continue to work in these environments
 % (g2347414).
-hostIP = '127.0.0.1';
+if version == 4
+    hostIP = '127.0.0.1';
+else
+    % ipv6 localhost
+    hostIP = '::1';
+end
 if parallel.internal.pool.isPoolThreadWorker
     % Guard against calling in to network interfaces from a thread-worker.
     % TODO(g2733379).
@@ -143,7 +210,7 @@ for net = networkInterfaces
     if net.IsUpAndRunning && ~net.IsLoopback
         netAddresses = net.InetAddresses;
         for netAddress = netAddresses
-            if ~iCheckAnyLocalAddress(netAddress) && ...
+            if ~iCheckAnyLocalAddress(netAddress, version) && ...
                     ~netAddress.IsLoopback() && ...
                     ~netAddress.IsMulticast() && ....
                     iMatchesIPVersion(netAddress, version)
@@ -155,8 +222,48 @@ for net = networkInterfaces
 end
 end
 
-function tf = iCheckAnyLocalAddress(address)
-% Check if address is local wildcard address: '0.0.0.0'
-% Default InetAddress is the wildcard address
-tf = isequal(address, matlab.net.internal.InetAddress);
+function tf = iCheckAnyLocalAddress(address, version)
+% Check if address is local wildcard address
+if version == 4
+    % Default InetAddress is the ipv4 wildcard address: '0.0.0.0'
+    wilcardAddress = matlab.net.internal.InetAddress;
+else
+    % ipv6 wildcard address: '::'
+    wilcardAddress = matlab.net.internal.InetAddress('::');
+end
+tf = isequal(address, wilcardAddress);
+end
+
+function tf = iIsValidLoopbackAddress(netAddress, version)
+tf = ~iCheckAnyLocalAddress(netAddress, version) && ...
+    netAddress.IsLoopback() && ...
+    ~netAddress.IsMulticast() && ....
+    iMatchesIPVersion(netAddress, version);
+end
+
+function addresses = iLookupLoopbackAddresses(version)
+% Search the network interfaces for all valid loopback addresses
+addresses = {};
+networkInterfaces = matlab.net.internal.NetworkInterface.list();
+for net = networkInterfaces
+    if net.IsUpAndRunning && net.IsLoopback
+        netAddresses = net.InetAddresses;
+        for netAddress = netAddresses
+            if iIsValidLoopbackAddress(netAddress, version)
+                addresses = [addresses char(string(netAddress))]; %#ok<AGROW>
+            end
+        end
+    end
+end
+end
+
+function addresses = iLookupLoopbackAddressesByName(name, version)
+% Try and lookup all valid loopback addresses by the given name
+addresses = {};
+netAddresses = matlab.net.internal.InetAddress.getAllByName(name);
+for netAddress = netAddresses
+    if iIsValidLoopbackAddress(netAddress, version)
+        addresses = [addresses char(string(netAddress))]; %#ok<AGROW>
+    end
+end
 end
