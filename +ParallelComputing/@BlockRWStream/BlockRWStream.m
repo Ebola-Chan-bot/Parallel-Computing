@@ -204,6 +204,7 @@ classdef BlockRWStream<handle
 			% IPollable=obj.RemoteReadBlock(ReadSize=ReadSize);
 			% IPollable=obj.RemoteReadBlock(ReadBytes=ReadBytes);
 			% IPollable=obj.RemoteReadBlock(___,LastObjectIndex=LastObjectIndex);
+			% IPollable=obj.RemoteReadBlock(Flags,___);
 			% ``
 			%# 示例
 			% 此示例与LocalReadBlock的示例类似，但展现了异步工作流，使得I/O和数据处理得以并行执行。

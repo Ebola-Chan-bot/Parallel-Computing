@@ -28,8 +28,12 @@ classdef(Abstract)IBlockRWer<handle
 	%
 	%			%没有元数据就可以不设置CollectData
 	%		end
-	%		function Data = Read(obj,Start,End)
+	%		function [Data,PiecesRead] = Read(obj,Start,End,Flag)
+	%			if exist('Flag','var')
+	%				End=min(End,intmax('int32')/obj.PieceSize+Start-1);
+	%			end
 	%			Data=obj.read(Start:End);
+	%			PiecesRead=End-Start+1;
 	%		end
 	%	end
 	%end
@@ -55,17 +59,22 @@ classdef(Abstract)IBlockRWer<handle
 		%BlockRWStream保证数据是从头到尾顺序读取的。每次读取数据块的大小不一定相同，但不会有重复或遗漏。您可以根据此顺序性优化读入器的性能。
 		%# 重写语法
 		% ```
-		% function Data=Read(obj,Start,End)
+		% function [Data,PiecesRead]=Read(obj,Start,End,Flag)
 		% end
 		% ```
 		%# 输入参数
-		%Start(1,1)double，起始数据片序号
-		%End(1,1)double，终止数据片序号
+		% Start(1,1)double，必需，起始数据片序号
+		% End(1,1)double，必需，终止数据片序号
+		% Flag(1,1)ParallelComputing.Flags，此参数应当为可选。如果指定了此参数，则只可能是ParallelComputing.Flags.ForGpu，表示此次读入的数据将被送入GPU。读入器应当
+		%  考虑此提示，因为GPU数组不能有超过`intmax('int32')`个元素。如果Start和End指定的数据块将导致数组尺寸超出限制，此函数应当强制下调End参数值使得读入数组元素个
+		%  数不至于超出限制，并返回PiecesRead参数值以指示实际读入了多少个数据片。
 		%# 返回值
 		% Data，从Start到End（含两端）的数据块，将返回给 Remote/Local ReadBlock 的调用方。如果您使用BlockRWStream的SpmdRun方法，此方法可以返回元胞数组，使得每个元胞
 		%  存放一个要交给SpmdRun的BlockProcess的参数。如果您指定了SpmdRun的NumGpuArguments参数值为n，则返回元胞数组的前n个元胞内必须是可以转换为gpuArray的数据类型。
-		%See also ParallelComputing.BlockRWStream
-		Data=Read(obj,Start,End)
+		% PiecesRead(1,1)，实际读入的数据片个数。如果返回missing，将假定读入器成功按照要求读入了所有所需的数据片。如果读入器不能完整读入所要求的数据片个数，且此情况不
+		%  是意外的（例如因GPU数组元素个数限制），请返回成功读入的数据片个数，下次读入将从最后一个成功读入的数据片之后开始。
+		%See also ParallelComputing.BlockRWStream intmax
+		[Data,PiecesRead]=Read(obj,Start,End,Flag)
 	end
 	methods
 		function Data=Write(~,Data,~,~)
