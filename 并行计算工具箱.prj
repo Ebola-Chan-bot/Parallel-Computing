@@ -52,8 +52,8 @@ function Pool = ParPool(varargin)</param.description>
       <item>19</item>
     </param.products.id>
     <param.products.version>
-      <item>23.2</item>
-      <item>23.2</item>
+      <item>7.8</item>
+      <item>12.5</item>
     </param.products.version>
     <param.platforms />
     <param.guid>372e4ea1-e356-4ee7-a94f-b1790b6318d9</param.guid>
@@ -153,7 +153,7 @@ resources/project
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2023b</root>
+      <root>C:\Program Files\MATLAB\R2023a</root>
       <toolboxes />
     </matlab>
     <platform>
