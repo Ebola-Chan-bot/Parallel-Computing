@@ -254,7 +254,7 @@ classdef BlockRWStream<handle
 			%  如果操作成功，后续元胞内依次排列LocalReadBlock的各个返回值。
 			%See also ParallelComputing.BlockRWStream.LocalReadBlock parallel.pool.PollableDataQueue.poll ParallelComputing.ParallelException
 			IPollable=parallel.pool.PollableDataQueue;
-			obj.RequestQueue.send([{'LocalReadBlock',IPollable},varargin]);
+			obj.RequestQueue.send([{'LocalReadBlock'},varargin,{'ReturnQueue',IPollable}]);
 		end
 		function varargout=RemoteReadBlock(obj,varargin)
 			%在计算线程上，向I/O线程请求读入一个数据块

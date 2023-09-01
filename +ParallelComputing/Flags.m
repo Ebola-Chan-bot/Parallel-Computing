@@ -1,7 +1,7 @@
 classdef Flags
 	enumeration
 		NoFlags
-		
+
 		%% SettingKind
 
 		Default
