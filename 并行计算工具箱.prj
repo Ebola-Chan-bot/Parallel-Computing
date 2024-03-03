@@ -41,7 +41,7 @@ function NonAsciiHostnameParpoolFix(RestartMatlab)
 %内置parpool函数的增强版，可选保留当前配置不变
 function Pool = ParPool(varargin)</param.description>
     <param.screenshot>${PROJECT_ROOT}\工具箱图像.jpg</param.screenshot>
-    <param.version>8.0.1</param.version>
+    <param.version>8.0.2</param.version>
     <param.output>${PROJECT_ROOT}\并行计算.mltbx</param.output>
     <param.products.name>
       <item>Parallel Computing Toolbox</item>
@@ -52,8 +52,8 @@ function Pool = ParPool(varargin)</param.description>
       <item>19</item>
     </param.products.id>
     <param.products.version>
-      <item>7.8</item>
-      <item>12.5</item>
+      <item>24.1</item>
+      <item>24.1</item>
     </param.products.version>
     <param.platforms />
     <param.guid>372e4ea1-e356-4ee7-a94f-b1790b6318d9</param.guid>
@@ -80,7 +80,9 @@ function Pool = ParPool(varargin)</param.description>
 resources/project
 **/*.vsdx
 **/*.asv
-**/*.png</param.exclude.filters>
+.vs
+提权操作*
+**/*.pdb</param.exclude.filters>
     <param.exclude.pcodedmfiles>true</param.exclude.pcodedmfiles>
     <param.examples />
     <param.demosxml />
@@ -93,7 +95,7 @@ resources/project
     <param.exported.on.package>false</param.exported.on.package>
     <param.required.addons>
       <requiredaddons>
-        <requiredAddOn earliest="11.2.0.0" fromRepository="true" id="b344599a-983e-4a6c-bd99-ed3a1bdd9626" include="true" latest="latest">埃博拉酱 的 MATLAB 扩展 Extension(2)</requiredAddOn>
+        <requiredAddOn earliest="11.2.0.0" fromRepository="true" id="b344599a-983e-4a6c-bd99-ed3a1bdd9626" include="true" latest="latest">埃博拉酱 的 MATLAB 扩展 Extension(3)</requiredAddOn>
       </requiredaddons>
     </param.required.addons>
     <param.matlab.project.id />
@@ -143,7 +145,6 @@ resources/project
       <file>${PROJECT_ROOT}\README.md</file>
       <file>${PROJECT_ROOT}\resources</file>
       <file>${PROJECT_ROOT}\工具箱图像.jpg</file>
-      <file>${PROJECT_ROOT}\部署</file>
     </fileset.rootfiles>
     <fileset.depfun.included />
     <fileset.depfun.excluded />
@@ -153,7 +154,7 @@ resources/project
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2023a</root>
+      <root>C:\Program Files\MATLAB\R2024a</root>
       <toolboxes />
     </matlab>
     <platform>
