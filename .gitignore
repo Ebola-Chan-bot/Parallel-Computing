@@ -1,2 +1,6 @@
 # List of untracked files to ignore
 *.mltbx
+**/*.asv
+.vs
+**/*.pdb
+**/x64
