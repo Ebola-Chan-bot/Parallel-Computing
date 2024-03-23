@@ -157,6 +157,10 @@ classdef BlockRWStream<handle
 			obj.GetRWer=GetRWer;
 			obj.RequestQueue=DataQueue;
 			obj.RequestQueue.afterEach(@(Request)obj.(Request{1})(Request{2:end}));
+			warning off MATLAB:table:RowsAddedNewVars
+			warning off MATLAB:table:RowsAddedExistingVars
+			obj.ObjectTable.BlocksRead=0x000;
+			obj.ObjectTable.BlocksWritten=0x000;
 			obj.NextObject;
 		end
 		function LocalWriteBlock(obj,Data,BlockIndex)
@@ -169,7 +173,7 @@ classdef BlockRWStream<handle
 			% BlockIndex，数据块的唯一标识符，从LocalReadBlock获取，以确保读入数据块和返回计算结果一一对应。
 			%See also ParallelComputing.BlockRWStream.LocalReadBlock
 			ObjectIndex=obj.BlockTable.ObjectIndex(BlockIndex);
-			Writer=obj.ObjectTable.RWer{ObjectIndex};
+			Writer=obj.ObjectTable.RWer(ObjectIndex);
 			obj.BlockTable.ReturnData{BlockIndex}=obj.WriteReturn(Data,obj.BlockTable.StartPiece(BlockIndex),obj.BlockTable.EndPiece(BlockIndex),Writer);
 			BlocksWritten=obj.ObjectTable.BlocksWritten(ObjectIndex)+1;
 			if BlocksWritten==obj.ObjectTable.BlocksRead(ObjectIndex)&&obj.ObjectsRead>=ObjectIndex
