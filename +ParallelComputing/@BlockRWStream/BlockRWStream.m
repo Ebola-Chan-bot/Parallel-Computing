@@ -71,9 +71,9 @@ classdef BlockRWStream<handle
 	end
 	properties(SetAccess=protected,Transient)
 		%维护每个数据块的信息表
-		BlockTable=table('Size',[0,4],'VariableTypes',["uint16","uint32","uint32","cell"],'VariableNames',["ObjectIndex","StartPiece","EndPiece","ReturnData"])
+		BlockTable table
 		%维护每个文件的信息表
-		ObjectTable
+		ObjectTable table
 	end
 	methods(Access=protected)
 		function NextObject(obj)
@@ -100,8 +100,7 @@ classdef BlockRWStream<handle
 			Index=obj.ObjectsRead+1;
 			if Index<=obj.NumObjects
 				obj.PiecesRead=0;
-				RWer=obj.GetRWer(obj.RWObjects(Index));
-				obj.ObjectTable(Index,1:2)={{RWer.CollectData},{RWer}};
+				obj.ObjectTable.RWer(Index)=obj.GetRWer(obj.RWObjects(Index));
 			end
 		end
 		function ToCollect=WriteReturn(~,Data,StartPiece,EndPiece,Writer)
@@ -158,7 +157,6 @@ classdef BlockRWStream<handle
 			obj.GetRWer=GetRWer;
 			obj.RequestQueue=DataQueue;
 			obj.RequestQueue.afterEach(@(Request)obj.(Request{1})(Request{2:end}));
-			obj.ObjectTable=table('Size',[obj.NumObjects,4],'VariableTypes',["cell","cell","uint16","uint16"],'VariableNames',["Metadata","RWer","BlocksRead","BlocksWritten"]);
 			obj.NextObject;
 		end
 		function LocalWriteBlock(obj,Data,BlockIndex)
@@ -175,6 +173,7 @@ classdef BlockRWStream<handle
 			obj.BlockTable.ReturnData{BlockIndex}=obj.WriteReturn(Data,obj.BlockTable.StartPiece(BlockIndex),obj.BlockTable.EndPiece(BlockIndex),Writer);
 			BlocksWritten=obj.ObjectTable.BlocksWritten(ObjectIndex)+1;
 			if BlocksWritten==obj.ObjectTable.BlocksRead(ObjectIndex)&&obj.ObjectsRead>=ObjectIndex
+				obj.ObjectTable.Metadata{ObjectIndex}=Writer.CollectData;
 				delete(Writer);
 			end
 			obj.ObjectTable.BlocksWritten(ObjectIndex)=BlocksWritten;
@@ -262,7 +261,7 @@ classdef BlockRWStream<handle
 			% 因此，此方法的输入参数和返回值与LocalReadBlock完全相同。此处不再赘述。
 			%See also ParallelComputing.BlockRWStream.LocalReadBlock
 			varargout=obj.RemoteReadAsync(varargin{:}).poll(Inf);
-			if numel(varargout)==1
+			if isscalar(varargout)
 				varargout{1}.Throw;
 			end
 		end

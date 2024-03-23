@@ -15,6 +15,9 @@ classdef(Abstract)IBlockRWer<handle
 	%		ProcessData={}
 	%		%设置一个空元胞以支持BlockRWStream.SpmdRun
 	%	end
+	%	properties(SetAccess=protected)
+	%		CollectData
+	%	end
 	%	methods
 	%		function obj = BlockVideoReader(VideoPath)
 	%			obj@VideoReader(VideoPath);
@@ -48,10 +51,12 @@ classdef(Abstract)IBlockRWer<handle
 		PieceSize double
 		%指示文件中有多少个数据片。BlockRWStream将根据此属性判断是否已读取完该文件。
 		NumPieces double
-		%文件特定、无关分块的，需要收集的数据。BlockRWStream将在打开每个文件时收集该数据，然后在CollectReturn时一并返回。如果文件没有需要收集的数据，可以不设置此属性的值。
-		CollectData
 		%文件特定、在块间共享的，处理过程所必需的数据。如果没有这样的数据，可以不设置此属性的值。但如果要用于BlockRWStream.SpmdRun自动调度，必须指定一个空元胞表示没有数据，否则SpmdRun会将一个空数组作为独立参数。
 		ProcessData
+	end
+	properties(SetAccess=protected,Abstract)
+		%文件特定、无关分块的，需要收集的数据。BlockRWStream将在打开每个文件时收集该数据，然后在CollectReturn时一并返回。如果文件没有需要收集的数据，可以不设置此属性的值。
+		CollectData
 	end
 	methods(Abstract)
 		%必须实现的抽象成员方法，用于读取指定的数据块。
