@@ -1,6 +1,6 @@
 function V = Version
 V.Me='v8.1.0';
-V.MatlabExtension=MATLAB.Version;
+V.MatlabExtension='v11.2.0';
 V.MATLAB='R2022b';
 persistent NewVersion
 try
