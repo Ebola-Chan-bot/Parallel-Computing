@@ -100,7 +100,7 @@ classdef BlockRWStream<handle
 			Index=obj.ObjectsRead+1;
 			if Index<=obj.NumObjects
 				obj.PiecesRead=0;
-				obj.ObjectTable.RWer(Index)=obj.GetRWer(obj.RWObjects(Index));
+				obj.ObjectTable.RWer{Index}=obj.GetRWer(obj.RWObjects(Index));
 			end
 		end
 		function ToCollect=WriteReturn(~,Data,StartPiece,EndPiece,Writer)
@@ -173,7 +173,7 @@ classdef BlockRWStream<handle
 			% BlockIndex，数据块的唯一标识符，从LocalReadBlock获取，以确保读入数据块和返回计算结果一一对应。
 			%See also ParallelComputing.BlockRWStream.LocalReadBlock
 			ObjectIndex=obj.BlockTable.ObjectIndex(BlockIndex);
-			Writer=obj.ObjectTable.RWer(ObjectIndex);
+			Writer=obj.ObjectTable.RWer{ObjectIndex};
 			obj.BlockTable.ReturnData{BlockIndex}=obj.WriteReturn(Data,obj.BlockTable.StartPiece(BlockIndex),obj.BlockTable.EndPiece(BlockIndex),Writer);
 			BlocksWritten=obj.ObjectTable.BlocksWritten(ObjectIndex)+1;
 			if BlocksWritten==obj.ObjectTable.BlocksRead(ObjectIndex)&&obj.ObjectsRead>=ObjectIndex
@@ -218,7 +218,7 @@ classdef BlockRWStream<handle
 			% ArgOuts=obj.RemoteReadAsync(ReadSize=Memory,LastObjectIndex=ObjectIndex).poll(Inf);
 			% %首次调用直接poll取得返回值
 			%
-			% if ArgOuts{1}~=ParallelComputing.ParallelException.Operation_succeeded
+			% if ArgOuts{1}~=ParallelComputing.Exception.Operation_succeeded
 			%	%返回元胞数组第1个值指示是否发生异常，后面才是主线程执行LocalReadBlock的返回值
 			%	ArgOuts{1}.Throw;
 			% end
@@ -242,7 +242,7 @@ classdef BlockRWStream<handle
 			%	%远程请求异步写出数据，此方法也是立即返回，不必等待数据实际写出到文件。
 			%	%上一块计算完毕，我们再来poll，取得之前异步请求读入的下一块数据。如果数据在计算结束之前就已经读完，这一步可以立即返回新的数据块。
 			%	ArgOuts=IPollable.poll(Inf);
-			%	if ArgOuts{1}~=ParallelComputing.ParallelException.Operation_succeeded
+			%	if ArgOuts{1}~=ParallelComputing.Exception.Operation_succeeded
 			%		%返回元胞数组第1个值指示是否发生异常，后面才是主线程执行LocalReadBlock的返回值
 			%		ArgOuts{1}.Throw;
 			%	end
@@ -253,9 +253,9 @@ classdef BlockRWStream<handle
 			% 本方法远程调用LocalReadBlock，参数与之相同，不再赘述。
 			%# 返回值
 			% IPollable(1,1)parallel.pool.PollableDataQueue，可等待的数据队列。此方法立即返回，不等待数据读入完毕，可以异步执行其它任务。需要数据时，调用其poll方法
-			%  可以取得数据。poll将返回元胞行向量，第一个元胞内是ParallelException异常枚举，如果是ParallelException.Operation_succeeded说明操作成功，否则操作失败。
+			%  可以取得数据。poll将返回元胞行向量，第一个元胞内是Exception异常枚举，如果是Exception.Operation_succeeded说明操作成功，否则操作失败。
 			%  如果操作成功，后续元胞内依次排列LocalReadBlock的各个返回值。
-			%See also ParallelComputing.BlockRWStream.LocalReadBlock parallel.pool.PollableDataQueue.poll ParallelComputing.ParallelException
+			%See also ParallelComputing.BlockRWStream.LocalReadBlock parallel.pool.PollableDataQueue.poll ParallelComputing.Exception
 			IPollable=parallel.pool.PollableDataQueue;
 			obj.RequestQueue.send([{'LocalReadBlock'},varargin,{'ReturnQueue',IPollable}]);
 		end
