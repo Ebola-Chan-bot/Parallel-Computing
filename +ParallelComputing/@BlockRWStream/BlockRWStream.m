@@ -192,7 +192,11 @@ classdef BlockRWStream<handle
 			% Metadata，每个文件的元数据，为每个IBlockRWer的Metadata属性值，排列在元胞列向量中。
 			%See also ParallelComputing.BlockRWStream ParallelComputing.IBlockRWer.Metadata
 			BlockIndex=1:obj.BlocksRead;
-			CollectData=splitapply(@(RD){RD},obj.BlockTable.ReturnData(BlockIndex),obj.BlockTable.ObjectIndex(BlockIndex));
+			if isempty(obj.BlockTable)
+				CollectData=cell(0,1);
+			else
+				CollectData=splitapply(@(RD){RD},obj.BlockTable.ReturnData(BlockIndex),obj.BlockTable.ObjectIndex(BlockIndex));
+			end
 			Metadata=obj.ObjectTable.Metadata;
 		end
 	end
