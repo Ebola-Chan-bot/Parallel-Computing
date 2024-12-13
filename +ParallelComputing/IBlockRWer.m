@@ -51,7 +51,8 @@ classdef(Abstract)IBlockRWer<handle
 		PieceSize double
 		%指示文件中有多少个数据片。BlockRWStream将根据此属性判断是否已读取完该文件。
 		NumPieces double
-		%文件特定、在块间共享的，处理过程所必需的数据。如果没有这样的数据，可以不设置此属性的值。但如果要用于BlockRWStream.SpmdRun自动调度，必须指定一个空元胞表示没有数据，否则SpmdRun会将一个空数组作为独立参数。
+		%文件特定、在块间共享的，处理过程所必需的数据。如果没有这样的数据，可以不设置此属性的值。但如果要用于BlockRWStream.SpmdRun自动调度，必须指定一个空元胞表示没有
+		% 数据，否则SpmdRun会将一个空数组作为独立参数。
 		ProcessData
 	end
 	properties(SetAccess=protected,Abstract)

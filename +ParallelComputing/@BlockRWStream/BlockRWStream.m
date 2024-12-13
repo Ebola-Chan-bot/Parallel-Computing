@@ -206,12 +206,15 @@ classdef BlockRWStream<handle
 			%在计算线程上，向I/O线程异步请求读入一个数据块。异步请求不会等待，而是先返回继续执行别的代码，等需要数据时再提取结果。
 			%此方法可以在并行计算线程（parfor spmd parfeval 等）上调用，但会在I/O主线程上执行读入操作，然后将数据返回给计算线程。主线程上实际执行的是LocalReadBlock。
 			%# 语法
-			% 本方法输入参数实际上和LocalReadBlock相同。返回值则是一个可等待对象，用于异步接收LocalReadBlock的返回值。
 			% ```
-			% IPollable=obj.RemoteReadBlock(ReadSize=ReadSize);
-			% IPollable=obj.RemoteReadBlock(ReadBytes=ReadBytes);
-			% IPollable=obj.RemoteReadBlock(___,LastObjectIndex=LastObjectIndex);
-			% IPollable=obj.RemoteReadBlock(Flags,___);
+			% %按照和LocalReadBlock相同的语法，但是返回一个可等待对象，用于异步接收LocalReadBlock的返回值。
+			% IPollable=obj.RemoteReadAsync(ReadSize=ReadSize);
+			% IPollable=obj.RemoteReadAsync(ReadBytes=ReadBytes);
+			% IPollable=obj.RemoteReadAsync(___,LastObjectIndex=LastObjectIndex);
+			% IPollable=obj.RemoteReadAsync(Flags,___);
+			%
+			% %抑或是由用户提供一个IPollable对象作为第一个输入参数，后续参数语法不变：
+			% obj.RemoteReadAsync(IPollable,___);
 			% ``
 			%# 示例
 			% 此示例与LocalReadBlock的示例类似，但展现了异步工作流，使得I/O和数据处理得以并行执行。
@@ -260,7 +263,12 @@ classdef BlockRWStream<handle
 			%  可以取得数据。poll将返回元胞行向量，第一个元胞内是Exception异常枚举，如果是Exception.Operation_succeeded说明操作成功，否则操作失败。
 			%  如果操作成功，后续元胞内依次排列LocalReadBlock的各个返回值。
 			%See also ParallelComputing.BlockRWStream.LocalReadBlock parallel.pool.PollableDataQueue.poll ParallelComputing.Exception
-			IPollable=parallel.pool.PollableDataQueue;
+			if nargout
+				IPollable=parallel.pool.PollableDataQueue;
+			else
+				IPollable=varargin{1};
+				varargin(1)=[];
+			end
 			obj.RequestQueue.send([{'LocalReadBlock'},varargin,{'ReturnQueue',IPollable}]);
 		end
 		function varargout=RemoteReadBlock(obj,varargin)
