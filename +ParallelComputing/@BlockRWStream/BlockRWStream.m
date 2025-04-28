@@ -146,16 +146,16 @@ classdef BlockRWStream<handle
 		end
 	end
 	methods
-		function obj = BlockRWStream(RWObjects,GetRWer,WatchDogTiming)
+		function obj = BlockRWStream(RWObjects,GetRWer,WatchDogTimeout)
 			%构造方法。需要提供文件列表和获取读写器的函数句柄。
 			%# 语法
 			% obj=ParallelComputing.BlockRWStream(RWObjects,GetRWer);
-			% obj=ParallelComputing.BlockRWStream(RWObjects,GetRWer,WatchDog);
+			% obj=ParallelComputing.BlockRWStream(RWObjects,GetRWer,WatchDogTimeout);
 			%# 输入参数
 			% RWObjects(:,1)，文件列表。本质上是要交给GetRWer的参数，因此该参数具体内容由GetRWer决定。每次打开新文件，会将RWObjects的一个元素交给GetRWer以获取读写
 			% 器。可以用元胞包含复杂参数，或者继承此类以实现更复杂的构造。
 			% GetRWer，用于获取读写器的可调用对象。该句柄必须只接受一个标量参数，输出一个ParallelComputing.IBlockRWer对象。
-			% WatchDogTiming(1,1)duration，看门狗延时。如果不设置此参数，则不启用看门狗。如果设置此参数，则在距离上次调用读/写块方法超过指定时间后，将自动关闭并
+			% WatchDogTimeout(1,1)duration，看门狗超时。如果不设置此参数，则不启用看门狗。如果设置此参数，则在距离上次调用读/写块方法超过指定时间后，将自动关闭并
 			%  行池。用户也可以通过WatchDog属性手动控制看门狗的工作状态。
 			%See also ParallelComputing.IBlockRWer
 			import parallel.pool.*
@@ -170,7 +170,7 @@ classdef BlockRWStream<handle
 			obj.ObjectTable.BlocksWritten=0x000;
 			obj.NextObject;
 			if nargin>2
-				obj.WatchDog=timer(StartDelay=seconds(WatchDogTiming),StartFcn=@ParallelComputing.internal.WatchDogBite);
+				obj.WatchDog=timer(StartDelay=seconds(WatchDogTimeout),StartFcn=@ParallelComputing.internal.WatchDogBite);
 			end
 		end
 		function LocalWriteBlock(obj,Data,BlockIndex)

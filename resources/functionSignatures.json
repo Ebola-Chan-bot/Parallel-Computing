@@ -9,7 +9,16 @@
 			{
 				"name": "GetRWer",
 				"kind": "required",
-				"purpose": "用于获取读写器的函数句柄"
+				"purpose": "用于获取读写器的可调用对象"
+			},
+			{
+				"name": "WatchDogTimeout",
+				"kind": "ordered",
+				"type": [
+					"scalar",
+					"duration"
+				],
+				"purpose": "看门狗超时"
 			}
 		]
 	},
