@@ -57,7 +57,7 @@ classdef PoolWatchDog<handle
 			% WatchSeconds(1,1)double，看门狗的忍耐秒数
 			obj.DataQueue=parallel.pool.DataQueue;
 			obj.Listener=obj.DataQueue.afterEach(@obj.FeedCallback);
-			obj.DogTimer=timer(StartDelay=WatchSeconds,TimerFcn=@(~,~)delete(gcp('nocreate')));
+			obj.DogTimer=timer(StartDelay=WatchSeconds,TimerFcn=@ParallelComputing.internal.WatchDogBite);
 		end
 		function Feed(obj)
 			%并行工人应当定时喂狗，证明自己没有卡死

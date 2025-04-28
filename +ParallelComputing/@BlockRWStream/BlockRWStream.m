@@ -75,6 +75,10 @@ classdef BlockRWStream<handle
 		%维护每个文件的信息表
 		ObjectTable table
 	end
+	properties(Transient)
+		%看门狗，用户可以手动启动或停止。到时间自动关闭并行池。将此属性设为空以彻底禁用看门狗。
+		WatchDog
+	end
 	methods(Access=protected)
 		function NextObject(obj)
 			%打开新的文件以供读取。此方法只有在BlockRWStream刚刚构建完毕，以及上一个文件读取完毕后才被内部调用。但需要检查是否所有文件已经读完。
@@ -142,14 +146,17 @@ classdef BlockRWStream<handle
 		end
 	end
 	methods
-		function obj = BlockRWStream(RWObjects,GetRWer)
+		function obj = BlockRWStream(RWObjects,GetRWer,WatchDogTiming)
 			%构造方法。需要提供文件列表和获取读写器的函数句柄。
 			%# 语法
 			% obj=ParallelComputing.BlockRWStream(RWObjects,GetRWer);
+			% obj=ParallelComputing.BlockRWStream(RWObjects,GetRWer,WatchDog);
 			%# 输入参数
 			% RWObjects(:,1)，文件列表。本质上是要交给GetRWer的参数，因此该参数具体内容由GetRWer决定。每次打开新文件，会将RWObjects的一个元素交给GetRWer以获取读写
 			% 器。可以用元胞包含复杂参数，或者继承此类以实现更复杂的构造。
-			% GetRWer，用于获取读写器的函数句柄。该句柄必须只接受一个标量参数，输出一个ParallelComputing.IBlockRWer对象。
+			% GetRWer，用于获取读写器的可调用对象。该句柄必须只接受一个标量参数，输出一个ParallelComputing.IBlockRWer对象。
+			% WatchDogTiming(1,1)duration，看门狗延时。如果不设置此参数，则不启用看门狗。如果设置此参数，则在距离上次调用读/写块方法超过指定时间后，将自动关闭并
+			%  行池。用户也可以通过WatchDog属性手动控制看门狗的工作状态。
 			%See also ParallelComputing.IBlockRWer
 			import parallel.pool.*
 			obj.RWObjects=RWObjects;
@@ -162,6 +169,9 @@ classdef BlockRWStream<handle
 			obj.ObjectTable.BlocksRead=0x000;
 			obj.ObjectTable.BlocksWritten=0x000;
 			obj.NextObject;
+			if nargin>2
+				obj.WatchDog=timer(StartDelay=seconds(WatchDogTiming),StartFcn=@ParallelComputing.internal.WatchDogBite);
+			end
 		end
 		function LocalWriteBlock(obj,Data,BlockIndex)
 			%在单线程环境下，写出一个数据块。
@@ -172,6 +182,10 @@ classdef BlockRWStream<handle
 			% Data，数据块处理后的计算结果。可以用元胞数组包含多个复杂的结果。此参数将被直接交给读写器的Write方法。
 			% BlockIndex，数据块的唯一标识符，从LocalReadBlock获取，以确保读入数据块和返回计算结果一一对应。
 			%See also ParallelComputing.BlockRWStream.LocalReadBlock
+			if ~isempty(obj.WatchDog)
+				obj.WatchDog.stop;
+				obj.WatchDog.start;
+			end
 			ObjectIndex=obj.BlockTable.ObjectIndex(BlockIndex);
 			Writer=obj.ObjectTable.RWer{ObjectIndex};
 			obj.BlockTable.ReturnData{BlockIndex}=obj.WriteReturn(Data,obj.BlockTable.StartPiece(BlockIndex),obj.BlockTable.EndPiece(BlockIndex),Writer);

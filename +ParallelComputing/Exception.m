@@ -5,5 +5,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		All_objects_have_been_read
 		Can_only_specify_ReadBytes_xor_ReadPieces
 		ReadBytes_xor_ReadPieces_must_specify_one
+		WatchDogSeconds_deprecated
 	end
 end
