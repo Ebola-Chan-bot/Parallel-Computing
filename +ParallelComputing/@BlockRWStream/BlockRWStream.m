@@ -170,7 +170,7 @@ classdef BlockRWStream<handle
 			obj.ObjectTable.BlocksWritten=0x000;
 			obj.NextObject;
 			if nargin>2
-				obj.WatchDog=timer(StartDelay=seconds(WatchDogTimeout),StartFcn=@ParallelComputing.internal.WatchDogBite);
+				obj.WatchDog=timer(StartDelay=seconds(WatchDogTimeout),TimerFcn=@ParallelComputing.internal.WatchDogBite);
 			end
 		end
 		function LocalWriteBlock(obj,Data,BlockIndex)
