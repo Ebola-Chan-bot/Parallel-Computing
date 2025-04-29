@@ -205,7 +205,9 @@ classdef BlockRWStream<handle
 			%  是用了SpmdRun且计算函数有p个返回值。
 			% Metadata，每个文件的元数据，为每个IBlockRWer的Metadata属性值，排列在元胞列向量中。
 			%See also ParallelComputing.BlockRWStream ParallelComputing.IBlockRWer.Metadata
-			obj.WatchDog.stop;
+			if~isempty(obj.WatchDog)
+				obj.WatchDog.stop;
+			end
 			BlockIndex=1:obj.BlocksRead;
 			if isempty(obj.BlockTable)
 				CollectData=cell(0,1);
