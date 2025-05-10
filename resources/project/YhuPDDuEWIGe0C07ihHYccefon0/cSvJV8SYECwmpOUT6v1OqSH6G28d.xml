@@ -1,6 +1,9 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Info>
     <Category UUID="FileClassCategory">
         <Label UUID="design"/>
+    </Category>
+    <Category UUID="Deployment_Category_1849db78-ebc0-4855-b68d-da17738b30bf">
+        <Label UUID="Deployment_GettingStartedGuideFile_1849db78-ebc0-4855-b68d-da17738b30bf"/>
     </Category>
 </Info>
