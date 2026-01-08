@@ -216,6 +216,9 @@ classdef BlockRWStream<handle
 			end
 			Metadata=obj.ObjectTable.Metadata;
 		end
+		function delete(obj)
+			delete(obj.WatchDog);
+		end
 	end
 	%% 远程
 	methods

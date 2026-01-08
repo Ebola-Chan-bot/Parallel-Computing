@@ -13,12 +13,15 @@ import ParallelComputing.*
 classdef BlockRWStream
 	%为无法一次性全部读入内存的大文件，提供单线程读写、多线程计算的解决方案
 end
+
 classdef(Abstract)IBlockRWer
 	%为BlockRWStream所调用的读写器必须实现的抽象接口类
 end
+
 classdef PoolWatchDog
 	%并行池看门狗，可以自动删除长时间卡死的并行池
 end
+
 classdef RemoteFunctionHandle
 	%远程调用句柄。无论在哪个线程上调用，都会在创建对象的线程上执行
 end
@@ -27,8 +30,10 @@ end
 ```MATLAB
 %将指定的GPU分配到并行进程
 function AssignGPUsToWorkers(UseGpu)
-%修复含有非ASCII字符的主机名的主机不能启动并行池的问题
+
+%修复含有非ASCII字符的主机名的主机不能启动并行池的问题（Windows）
 function NonAsciiHostnameParpoolFix(RestartMatlab)
+
 %内置parpool函数的增强版，可选保留当前配置不变
 function Pool = ParPool(varargin)
 ```
