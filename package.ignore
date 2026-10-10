@@ -21,7 +21,6 @@
 
 % Exclude source control files
 **/.git*
-**/.git/
 **/*.svn
 
 % Toolbox files and project files
@@ -47,3 +46,5 @@ deploymentLog.html
 工具箱图像.jpg
 *.sln
 提权操作
+README.md
+**/*.vsdx
