@@ -8,5 +8,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LocalDebuggerCommandArguments>"C:\Program Files\MATLAB\R2024a" Non_ascii_hostname_parpool_fix</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommandArgumentsHistory>"C:\Program Files\MATLAB\R2024a" Non_ascii_hostname_parpool_fix|</LocalDebuggerCommandArgumentsHistory>
   </PropertyGroup>
 </Project>

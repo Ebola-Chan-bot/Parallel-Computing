@@ -4,7 +4,7 @@ arguments
 end
 persistent pVersion
 if isempty(pVersion)||AlwaysCheck
-	V='8.2.1';
+	V='8.3.0';
 	if~isempty(metafunction('TextAnalytics.CheckUpdateFromGitHub'))
 		TextAnalytics.CheckUpdateFromGitHub('https://github.com/Ebola-Chan-bot/Parallel-Computing/releases','埃博拉酱的并行计算工具箱',['v',V]);
 	end
