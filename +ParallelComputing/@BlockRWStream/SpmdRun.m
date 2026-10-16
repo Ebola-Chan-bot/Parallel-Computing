@@ -35,7 +35,7 @@
 %[text] UseGpu(1,:)=1:gpuDeviceCount，要使用的GPU设备编号。如果不使用GPU，设为空数组；如果使用，则将自动为最多指定个数的进程分配GPU计算，其它进程使用CPU计算。此参数为空时，将忽略NumGpuArguments参数。
 %[text] IgnoreException(1,1)logical=false，如果设为true，将异常转发为warning，而不视为错误，程序可以继续执行
 %[text] WatchDogSeconds(1,1)double=Inf，并行池看门狗忍耐时长。如果设为Inf，则不使用看门狗。看门狗监控并行池，一旦卡死超过指定忍耐时长，就会强行终止并行池，但不会终止整个程序，仍然继续往下执行。如果不使用并行池，此项设置无效。
-%[text] LogDirectory(1,:)char=''，日志输出目录。将输出的日志文件名是\`sprintf('%u.log',spmdIndex)\`。如果指定此参数为非空，BlockProcess的最后一个参数必须接受一个日志文件ID。日志文件不仅会被BlockProcess写入，此函数内部也会向其写入额外日志，包含文件块索引
+%[text] LogDirectory(1,:)char=''，日志输出目录。将输出的日志文件名是`sprintf('%u.log',spmdIndex)`。如果指定此参数为非空，BlockProcess的最后一个参数必须接受一个日志文件ID。日志文件不仅会被BlockProcess写入，此函数内部也会向其写入额外日志，包含文件块索引
 %[text] ## 返回值
 %[text] 此函数最后会调用CollectReturn成员方法，直接返回该方法返回的CollectData和Metadata。
 %[text] CollectData(:,1)cell，每个元胞对应一个文件的计算结果。元胞内又是元胞列向量，每个元胞对应一个数据块的计算结果：如果读写器重写了Write方法，即为此Write方法的返回值；若未重写，则为包含BlockProcess每个返回值的元胞行向量。例如，如果返回m×1元胞列向量，说明输入的文件有m个；其中第a个元胞内是n×1元胞列向量，说明第a个文件被分成了n块读入；其中第b个元胞内是1×p元胞行向量，说明BlockProcess有p个返回值。
@@ -259,6 +259,7 @@ while ~isequaln(Data,missing)
 				[varargout{:}]=BlockProcess(Data{:},ObjectData{:},ConstantArgument{:});
 				GPU.reset;%此操作会让所有gpuArray无效，因此必须在gather回所有参数以后调用
 			else
+				warning('未知错误：%s',ME.identifier);
 				ME.rethrow;
 			end
 		end
